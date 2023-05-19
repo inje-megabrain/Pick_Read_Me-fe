@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../Pages/Main';
+import MyPage from '../Pages/MyPage';
 
 const AppRouter = () => {
   return (
     <>
       <BrowserRouter>
-        <div className="bg-red-500">TailWind CSS 적용 TEST</div>
-        <div className="bg-red-300">Another Color</div>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </BrowserRouter>
     </>
