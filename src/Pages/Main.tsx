@@ -8,7 +8,7 @@ const Main = () => {
     navigate('/mypage');
   };
   const handleLogin = () => {
-    navigate('/login');
+    navigate('/test');
   };
 
   return (
@@ -17,7 +17,8 @@ const Main = () => {
       <div className="bg-red-500">TailWind CSS 적용 TEST</div>
       <div className="bg-red-300">Another Color</div>
       <button onClick={handleMyPage}>MyPage로 가기</button>
-      <button onClick={handleLogin}>Login하기</button>
+      <br />
+      <button onClick={handleLogin}>Test</button>
     </>
   );
 };

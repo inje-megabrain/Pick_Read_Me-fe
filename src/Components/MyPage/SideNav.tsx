@@ -13,6 +13,9 @@ const SideNav = () => {
           <NavItem>
             <NavLink to={'/'}>Home</NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink to={'delete'}>회원 탈퇴</NavLink>
+          </NavItem>
         </NavList>
       </Nav>
     </div>
