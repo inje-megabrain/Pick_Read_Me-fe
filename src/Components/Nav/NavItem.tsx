@@ -6,7 +6,10 @@ interface NavItemProps {
 
 const NavItem = ({ children }: NavItemProps) => {
   return (
-    <li role="presentation" className="mx-auto my-0 w-24">
+    <li
+      role="presentation"
+      className="pl-3 py-3 w-40 text-xl hover:bg-slate-300 cursor-pointer rounded-md"
+    >
       {children}
     </li>
   );

@@ -17,11 +17,11 @@ const AppRouter = () => {
           <Route path="/mypage" element={<MyPage />}>
             <Route path="delete" element={<Delete />} />
           </Route>
-          <Route path="login" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />}></Route>
           {/* <Route path="/" element={<Test />}>
-            <Route path="testM" element={<TestM />} />
-            <Route path="testT" element={<TestT />} />
+            <Route path="testB" element={<TestM />} />
+            <Route path="testA" element={<TestT />} />
           </Route> */}
         </Routes>
       </BrowserRouter>

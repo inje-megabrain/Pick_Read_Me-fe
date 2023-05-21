@@ -1,7 +1,7 @@
 const TestM = () => {
   return (
     <div>
-      <h1>Test 페이지 2</h1>
+      <h1>Test 페이지 B</h1>
     </div>
   );
 };
