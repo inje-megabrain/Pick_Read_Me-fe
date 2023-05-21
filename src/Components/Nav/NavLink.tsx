@@ -1,16 +1,19 @@
 import { ReactNode } from 'react';
+import { NavLink } from 'react-router-dom';
 
 interface NavLinkProps {
   children: ReactNode;
   to: string;
 }
 
-const NavLink = (props: NavLinkProps) => {
+const NavLinks = ({ to, children }: NavLinkProps) => {
   return (
     <>
-      <a href={props.to}>{props.children}</a>
+      <NavLink id="active" to={to}>
+        {children}
+      </NavLink>
     </>
   );
 };
 
-export default NavLink;
+export default NavLinks;
