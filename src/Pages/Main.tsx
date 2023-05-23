@@ -8,17 +8,17 @@ const Main = () => {
     navigate('/mypage');
   };
   const handleLogin = () => {
-    navigate('/test');
+    navigate('/login');
   };
 
   return (
     <>
-      <div>Main</div>
-      <div className="bg-red-500">TailWind CSS 적용 TEST</div>
-      <div className="bg-red-300">Another Color</div>
+      <div>Main페이지임니당</div>
+      <br />
       <button onClick={handleMyPage}>MyPage로 가기</button>
       <br />
-      <button onClick={handleLogin}>Test</button>
+      <button onClick={handleLogin}>Login</button>
+      <br />
     </>
   );
 };

@@ -7,6 +7,7 @@ import MyPage from '../Pages/MyPage';
 import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import Delete from '../Pages/Delete';
+import Redirect from '../Pages/Redirect';
 
 const AppRouter = () => {
   return (
@@ -18,8 +19,9 @@ const AppRouter = () => {
             <Route path="myPost" element={<Login />} />
             <Route path="like" element={<Login />} />
             <Route path="delete" element={<Delete />} />
-            <Route path="login" element={<Login />} />
           </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/redirect" element={<Redirect />} />
 
           <Route path="*" element={<NotFound />}></Route>
           {/* <Route path="/" element={<Test />}>
