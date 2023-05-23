@@ -18,7 +18,7 @@ const SideNav = () => {
             <NavLink to={'like'}>Like</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'login'}>로그아웃</NavLink>
+            <NavLink to={'logout'}>로그아웃</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to={'delete'}>회원 탈퇴</NavLink>

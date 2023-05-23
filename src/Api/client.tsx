@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie } from './Cookies';
+import { getCookie, setCookie } from './Cookies';
 import { BASE_URL } from './ constants';
 
 const ACCESS_HEADER_KEY = 'Authorization';
@@ -20,11 +20,9 @@ client.interceptors.response.use((res) => {
     const token = res.data as { accessToken?: string; refreshToken?: string };
     if (token.accessToken) {
       setAccessToken(token.accessToken);
-      //쿠키 저장
     }
     if (token.refreshToken) {
       setRefreshToken(token.refreshToken);
-      //쿠키 저장
     }
   }
   return res;
@@ -35,6 +33,13 @@ export const setRefreshToken = (token: string) => {
     client.defaults.headers.common[
       REFRESH_HEADER_KEY
     ] = `${TOKEN_TYPE} ${token}`;
+    //쿠키 저장
+    setCookie('refreshToken', `${token}`, {
+      path: 'http://52.78.80.150:9000/',
+      //httpOnly: true,
+      expires: new Date(new Date().valueOf() + 1000 * 60 * 60 * 24 * 3),
+      sameSite: 'none',
+    });
   } else {
     delete client.defaults.headers.common[REFRESH_HEADER_KEY];
   }
@@ -45,15 +50,11 @@ export const setAccessToken = (token: string) => {
     client.defaults.headers.common[
       ACCESS_HEADER_KEY
     ] = `${TOKEN_TYPE} ${token}`;
+    //LocalStorage 저장
+    window.localStorage.setItem('accessToken', token);
   } else {
     delete client.defaults.headers.common[ACCESS_HEADER_KEY];
   }
 };
-
-// export default axios.create({
-//   headers: {
-//     accessToken: await getCookie('accessToken'),
-//   },
-// });
 
 export default client;
