@@ -1,17 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import Header from '../Components/Header';
+import Header from '../Components/Headers/Header';
 import MainScroll from './MainScroll';
+import StickyBar from '../Components/StickyBar/StickyBar';
+import MainScrollHeader from '../Components/Headers/MainScrollHeader';
+import { Outlet } from 'react-router-dom';
 
 const Main = () => {
-  let navigate = useNavigate();
-
   return (
     <div>
       <Header />
-      <br />
-      <div>Main페이지임니당</div>
-      <MainScroll />
-      {/* <RankNav /> */}
+      <div className="bg-blue-200 w-4/5 h-screen mx-auto">
+        <MainScrollHeader />
+        <MainScroll />
+        <Outlet />
+        <StickyBar />
+      </div>
     </div>
   );
 };

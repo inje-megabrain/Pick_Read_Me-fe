@@ -8,13 +8,18 @@ import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import Delete from '../Pages/Delete';
 import Redirect from '../Pages/Redirect';
+import MainScroll from '../Pages/MainScroll';
+import Rank from '../Pages/Rank';
 
 const AppRouter = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Main />}>
+            <Route path="readme" element={<MainScroll />} />
+            <Route path="rank" element={<Rank />} />
+          </Route>
           <Route path="/mypage" element={<MyPage />}>
             <Route path="myPost" element={<Login />} />
             <Route path="like" element={<Login />} />

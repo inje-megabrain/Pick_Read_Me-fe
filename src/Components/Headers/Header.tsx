@@ -12,7 +12,8 @@ const Header = () => {
   };
   return (
     <div>
-      <div className="bg-zinc-500 h-24 flex items-center justify-end">
+      <div className="bg-zinc-500 h-24 flex items-center justify-between px-10">
+        <div className="text-3xl">PICK README</div>
         <div>
           <button
             onClick={handleMyPage}
@@ -20,7 +21,7 @@ const Header = () => {
           >
             MyPage
           </button>
-          <button onClick={handleLogin} className="btn btn-outline btn-success">
+          <button onClick={handleLogin} className="btn btn-outline btn-primary">
             Login
           </button>
         </div>
