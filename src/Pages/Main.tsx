@@ -1,25 +1,18 @@
-import React from 'react';
-import MyPage from './MyPage';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Header from '../Components/Header';
+import MainScroll from './MainScroll';
 
 const Main = () => {
   let navigate = useNavigate();
-  const handleMyPage = () => {
-    navigate('/mypage');
-  };
-  const handleLogin = () => {
-    navigate('/login');
-  };
 
   return (
-    <>
+    <div>
+      <Header />
+      <br />
       <div>Main페이지임니당</div>
-      <br />
-      <button onClick={handleMyPage}>MyPage로 가기</button>
-      <br />
-      <button onClick={handleLogin}>Login</button>
-      <br />
-    </>
+      <MainScroll />
+      {/* <RankNav /> */}
+    </div>
   );
 };
 
