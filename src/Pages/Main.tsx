@@ -12,12 +12,14 @@ const Main = () => {
   return (
     <div>
       <Header />
-      {selectedId && <Backdrop />}
-      <div className="bg-blue-200 w-4/5 h-screen relative">
-        <MainScrollHeader />
-        <MainScroll />
-        <Outlet />
-        <StickyBar />
+      <div className="flex justify-center">
+        {selectedId && <Backdrop />}
+        <div className="bg-blue-200 w-4/5 h-screen">
+          <MainScrollHeader />
+          <MainScroll />
+          <Outlet />
+          <StickyBar />
+        </div>
       </div>
     </div>
   );
