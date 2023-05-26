@@ -12,7 +12,10 @@ const MainScrollHeader = () => {
   };
   return (
     <>
-      <div className="mt-10">
+      <div
+        className="mt-10 mx-auto"
+        // style={{ margin: '-25 0 0 -25' }}
+      >
         <div className="tabs tabs-boxed">
           <a className="tab tab-lg" onClick={handleReadme}>
             ReadMe
