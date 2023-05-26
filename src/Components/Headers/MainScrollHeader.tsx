@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import '../Nav/Nav.css';
 
 const MainScrollHeader = () => {
   const navigate = useNavigate();
@@ -8,22 +9,29 @@ const MainScrollHeader = () => {
   };
 
   const handleRank = () => {
-    navigate('rank');
+    navigate('/rank');
   };
   return (
     <>
       <div
-        className="mt-10 mx-auto"
+        className="mt-10 mx-auto h-20 flex items-center"
         // style={{ margin: '-25 0 0 -25' }}
       >
-        <div className="tabs tabs-boxed">
-          <a className="tab tab-lg" onClick={handleReadme}>
-            ReadMe
-          </a>
-          <a className="tab tab-lg" onClick={handleRank}>
-            Rank
-          </a>
-        </div>
+        <nav id="active">
+          <ul>
+            <li className="float-left text-xl ml-5 mr-5">
+              <NavLink to="/">
+                <span>ReadMe</span>
+              </NavLink>
+            </li>
+            <li className="float-left text-xl">
+              <NavLink to="/rank">
+                <span>Rank</span>
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <br />
       </div>
     </>
   );

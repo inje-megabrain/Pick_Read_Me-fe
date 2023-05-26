@@ -1,11 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import postAtom from '../Atoms/post';
+import MainScrollHeader from '../Components/Headers/MainScrollHeader';
 
 const MainScroll = () => {
   const [selectedId, setSelectedId] = useRecoilState(postAtom);
-  //const [selectedId, setSelectedId] = useState(null);
 
   const items = [
     { id: 1, subtitle: 'sub01', title: 'title01' },
@@ -21,6 +20,7 @@ const MainScroll = () => {
 
   return (
     <>
+      <MainScrollHeader />
       <div className="bg-zinc-300 h-screen float-left w-4/5">
         {items.map((item: any) => (
           <motion.div

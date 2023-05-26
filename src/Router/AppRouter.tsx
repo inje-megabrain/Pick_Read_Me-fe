@@ -17,7 +17,7 @@ const AppRouter = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />}>
-            <Route path="readme" element={<MainScroll />} />
+            <Route path="/" element={<MainScroll />} />
             <Route path="rank" element={<Rank />} />
           </Route>
           <Route path="/mypage" element={<MyPage />}>
