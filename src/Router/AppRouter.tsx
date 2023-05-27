@@ -10,6 +10,7 @@ import Delete from '../Pages/Delete';
 import Redirect from '../Pages/Redirect';
 import MainScroll from '../Pages/MainScroll';
 import Rank from '../Pages/Rank';
+import Logout from '../Components/MyPage/Logout';
 
 const AppRouter = () => {
   return (
@@ -23,6 +24,7 @@ const AppRouter = () => {
           <Route path="/mypage" element={<MyPage />}>
             <Route path="myPost" element={<Login />} />
             <Route path="like" element={<Login />} />
+            <Route path="logout" element={<Logout />} />
             <Route path="delete" element={<Delete />} />
           </Route>
           <Route path="/login" element={<Login />} />
