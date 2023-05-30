@@ -35,11 +35,14 @@ export const setRefreshToken = (token: string) => {
     ] = `${TOKEN_TYPE} ${token}`;
     //쿠키 저장
     setCookie('refreshToken', `${token}`, {
-      path: 'http://52.78.80.150:9000/',
+      path: 'http://52.78.80.150:9000',
+      //path: '/',
       //httpOnly: true,
       expires: new Date(new Date().valueOf() + 1000 * 60 * 60 * 24 * 3),
       sameSite: 'none',
+      secure: true,
     });
+    console.log(token);
   } else {
     delete client.defaults.headers.common[REFRESH_HEADER_KEY];
   }
