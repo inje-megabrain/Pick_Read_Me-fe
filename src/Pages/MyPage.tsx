@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import Profile from '../Components/MyPage/Profile';
 import SideNav from '../Components/MyPage/SideNav';
-import { getCookie } from '../Api/Cookies';
+//import { getCookie } from '../Api/Cookies';
+import { useRefresh } from '../Hooks/useRefresh';
 
 const MyPage = () => {
-  console.log(getCookie('refreshToken'));
+  //useAccess();
+  useRefresh();
   return (
     <>
       <div className="flex justify-start fixed">

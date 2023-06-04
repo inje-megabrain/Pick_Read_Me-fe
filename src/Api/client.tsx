@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie, setCookie } from './Cookies';
+import { setCookie } from './Cookies';
 import { BASE_URL } from './ constants';
 
 const ACCESS_HEADER_KEY = 'Authorization';
@@ -15,18 +15,30 @@ client.interceptors.request.use((req) => {
   return req;
 });
 
-client.interceptors.response.use((res) => {
-  if (res.status === 200 && res.data) {
-    const token = res.data as { accessToken?: string; refreshToken?: string };
-    if (token.accessToken) {
-      setAccessToken(token.accessToken);
+client.interceptors.response.use(
+  (res) => {
+    if (res.status === 200 && res.data) {
+      const token = res.data as { accessToken?: string; refreshToken?: string };
+      if (token.accessToken) {
+        setAccessToken(token.accessToken);
+      }
+      if (token.refreshToken) {
+        setRefreshToken(token.refreshToken);
+      }
     }
-    if (token.refreshToken) {
-      setRefreshToken(token.refreshToken);
+    return res;
+  },
+  (error) => {
+    if (
+      error.response.status === 401 &&
+      error.response.data.error.includes('만료')
+    ) {
+      console.log('얍 ' + error);
+      localStorage.clear();
     }
+    return Promise.reject(error);
   }
-  return res;
-});
+);
 
 export const setRefreshToken = (token: string) => {
   if (token) {
@@ -38,11 +50,11 @@ export const setRefreshToken = (token: string) => {
       path: 'http://52.78.80.150:9000',
       //path: '/',
       //httpOnly: true,
-      expires: new Date(new Date().valueOf() + 1000 * 60 * 60 * 24 * 3),
+      //expires: new Date(new Date().valueOf() + 1000 * 60 * 60 * 24 * 3),
+      maxAge: 180,
       sameSite: 'none',
       secure: true,
     });
-    console.log(token);
   } else {
     delete client.defaults.headers.common[REFRESH_HEADER_KEY];
   }

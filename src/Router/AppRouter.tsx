@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import Main from '../Pages/Main';
 // import Test from '../Pages/Test';
 // import TestM from '../Pages/TestM';
@@ -11,6 +11,7 @@ import Redirect from '../Pages/Redirect';
 import MainScroll from '../Pages/MainScroll';
 import Rank from '../Pages/Rank';
 import Logout from '../Components/MyPage/Logout';
+import { useEffect } from 'react';
 
 const AppRouter = () => {
   return (
@@ -21,6 +22,7 @@ const AppRouter = () => {
             <Route path="/" element={<MainScroll />} />
             <Route path="rank" element={<Rank />} />
           </Route>
+
           <Route path="/mypage" element={<MyPage />}>
             <Route path="myPost" element={<Login />} />
             <Route path="like" element={<Login />} />
