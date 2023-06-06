@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
+import { IUser } from 'src/Api/fetchUser';
 
-const authAtom = atom<string | null>({
+const authAtom = atom<IUser | null>({
   key: 'authAtom',
   default: null,
 });

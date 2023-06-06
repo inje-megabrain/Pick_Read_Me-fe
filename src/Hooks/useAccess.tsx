@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
-import authAtom from '../Atoms/auth';
+import { useSetRecoilState } from 'recoil';
+import accessAtom from '../Atoms/access';
 import { useNavigate } from 'react-router-dom';
 
 export const useAccess = () => {
-  const [auth, setAuth] = useRecoilState(authAtom);
+  const setAccessToken = useSetRecoilState(accessAtom);
   const token = localStorage.getItem('accessToken');
   const navigate = useNavigate();
   useEffect(() => {
@@ -12,7 +12,7 @@ export const useAccess = () => {
       navigate('/');
       console.log('로그인 해주세요');
     } else {
-      setAuth(token);
+      setAccessToken(token);
       console.log('로그인 됐엉');
     }
   }, []);

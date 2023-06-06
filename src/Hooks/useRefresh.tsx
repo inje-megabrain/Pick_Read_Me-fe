@@ -8,6 +8,7 @@ export const useRefresh = () => {
   useEffect(() => {
     if (!refresh) {
       console.log('토큰 만료');
+      localStorage.removeItem('accessToken');
       navigate('/');
     }
   }, []);

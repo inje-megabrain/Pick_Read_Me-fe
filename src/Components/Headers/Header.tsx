@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import authAtom from '../../Atoms/auth';
+import accessAtom from '../../Atoms/access';
 
 const Header = () => {
-  const auth = useRecoilValue(authAtom);
+  const auth = useRecoilValue(accessAtom);
 
   const navigate = useNavigate();
+
+  const handleWrite = () => {};
 
   const handleMyPage = () => {
     navigate('/mypage');
@@ -21,12 +23,20 @@ const Header = () => {
         <div className="text-3xl">PICK README</div>
         <div>
           {auth ? (
-            <button
-              onClick={handleMyPage}
-              className="btn btn-outline btn-secondary"
-            >
-              MyPage
-            </button>
+            <>
+              <button
+                onClick={handleWrite}
+                className="btn btn-outline btn-secondary mr-5"
+              >
+                Write
+              </button>
+              <button
+                onClick={handleMyPage}
+                className="btn btn-outline btn-secondary"
+              >
+                MyPage
+              </button>
+            </>
           ) : (
             <button
               onClick={handleLogin}

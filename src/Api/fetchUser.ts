@@ -27,14 +27,9 @@ export default function fetchUsers() {
       })
       .then((v) => {
         resolve(v.data);
-        console.log(accessToken);
-        console.log(refreshToken);
-        console.log('등딩엉성공');
       })
       .catch((err) => {
         console.log('fetchUser 에러 ' + err);
-        console.log('accessToken: ' + accessToken);
-        console.log('refreshToken: ' + refreshToken);
       });
   });
 }
