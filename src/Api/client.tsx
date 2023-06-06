@@ -1,6 +1,8 @@
-import axios from 'axios';
-import { setCookie } from './Cookies';
+import axios, { AxiosResponse } from 'axios';
+import { getCookie, setCookie } from './Cookies';
 import { BASE_URL } from './ constants';
+import logout from './logout';
+import fetchAccess from './fetchAccess';
 
 const ACCESS_HEADER_KEY = 'Authorization';
 const REFRESH_HEADER_KEY = 'AuthorizationSecret';
@@ -29,13 +31,32 @@ client.interceptors.response.use(
     return res;
   },
   (error) => {
-    if (
-      error.response.status === 401 &&
-      error.response.data.error.includes('만료')
-    ) {
-      console.log('얍 ' + error);
-      localStorage.clear();
+    if (error.response.status === 401) {
+      if (error.response.data.includes('만료')) {
+        //"리프레시 토큰 만료" , 엑세스, 리프레시 둘 다 없음
+        localStorage.clear();
+        window.location.reload();
+        //logout().then(() => console.log('로그아웃'));
+      }
+      if (error.response.data.includes('IP')) {
+        logout()
+          .then(() => console.log('등록된 IP가 있어 로그아웃합니다.'))
+          .then(() => {
+            window.location.reload();
+          });
+      }
+      if (error.response.data.includes('Expired')) {
+        localStorage.removeItem('accessToken');
+        fetchAccess()
+          .then((v) => {
+            localStorage.setItem('accessToken', v.data);
+          })
+          .then(() => {
+            window.location.reload();
+          });
+      }
     }
+
     return Promise.reject(error);
   }
 );
@@ -50,8 +71,8 @@ export const setRefreshToken = (token: string) => {
       path: 'http://52.78.80.150:9000',
       //path: '/',
       //httpOnly: true,
-      //expires: new Date(new Date().valueOf() + 1000 * 60 * 60 * 24 * 3),
-      maxAge: 180,
+      expires: new Date(new Date().valueOf() + 3024000),
+      //maxAge: 180,
       sameSite: 'none',
       secure: true,
     });

@@ -4,7 +4,7 @@ import accessAtom from '../Atoms/access';
 import { useNavigate } from 'react-router-dom';
 
 export const useAccess = () => {
-  const setAccessToken = useSetRecoilState(accessAtom);
+  const setAccess = useSetRecoilState(accessAtom);
   const token = localStorage.getItem('accessToken');
   const navigate = useNavigate();
   useEffect(() => {
@@ -12,7 +12,7 @@ export const useAccess = () => {
       navigate('/');
       console.log('로그인 해주세요');
     } else {
-      setAccessToken(token);
+      setAccess(token);
       console.log('로그인 됐엉');
     }
   }, []);
