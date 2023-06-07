@@ -33,6 +33,7 @@ const AppRouter = () => {
             <Route path="logout" element={<Logout />} />
             <Route path="delete" element={<Delete />} />
           </Route>
+
           <Route path="/login" element={<Login />} />
           <Route path="/redirect" element={<Redirect />} />
 

@@ -8,25 +8,17 @@ const MyPage = () => {
   //useAccess();
   useRefresh();
   return (
-    <>
-      <div>
-        {/* <div>
-          <SideNav />
-        </div> */}
-        <div className="flex justify-start fixed">
+    <div className="flex">
+      <div className="w-60">
+        <div className="flex justify-start w-60 h-screen py-24 bg-slate-100">
           <SideNav />
         </div>
-        <div className="flex justify-center">
-          <Outlet />
-        </div>
-        {/* <div>
-          <Profile />
-        </div> */}
-        {/* <div className="flex fixed mx-auto my-0 w-full min-w-fit">
-          <Outlet></Outlet>
-        </div> */}
       </div>
-    </>
+
+      <div className="flex justify-center w-full">
+        <Outlet />
+      </div>
+    </div>
   );
 };
 

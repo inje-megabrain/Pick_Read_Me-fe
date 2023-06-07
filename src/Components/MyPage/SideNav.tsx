@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const SideNav = () => {
   return (
-    <div className="fixed bg-slate-100 w-60 h-full py-24">
+    <div className=" w-full h-max">
       <Nav>
         <NavList>
           <NavItem>
