@@ -2,6 +2,7 @@ import Nav from '../Nav/Nav';
 import NavList from '../Nav/NavList';
 import NavItem from '../Nav/NavItem';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SideNav = () => {
   return (
@@ -10,6 +11,9 @@ const SideNav = () => {
         <NavList>
           <NavItem>
             <NavLink to={'/'}>Home</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink to={'profile'}>Profile</NavLink>
           </NavItem>
           <NavItem>
             <NavLink to={'mypost'}>My Post</NavLink>

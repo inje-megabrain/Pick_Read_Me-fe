@@ -12,6 +12,9 @@ import MainScroll from '../Pages/MainScroll';
 import Rank from '../Pages/Rank';
 import Logout from '../Components/MyPage/Logout';
 import { useEffect } from 'react';
+import Profile from '../Components/MyPage/Profile';
+import MyPost from '../Pages/MyPost';
+import Like from '../Pages/Like';
 
 const AppRouter = () => {
   return (
@@ -24,8 +27,9 @@ const AppRouter = () => {
           </Route>
 
           <Route path="/mypage" element={<MyPage />}>
-            <Route path="myPost" element={<Login />} />
-            <Route path="like" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="myPost" element={<MyPost />} />
+            <Route path="like" element={<Like />} />
             <Route path="logout" element={<Logout />} />
             <Route path="delete" element={<Delete />} />
           </Route>

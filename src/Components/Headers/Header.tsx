@@ -10,7 +10,7 @@ const Header = () => {
   const handleWrite = () => {};
 
   const handleMyPage = () => {
-    navigate('/mypage');
+    navigate('/mypage/profile');
   };
 
   const handleLogin = () => {

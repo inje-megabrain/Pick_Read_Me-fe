@@ -71,8 +71,7 @@ export const setRefreshToken = (token: string) => {
       path: 'http://52.78.80.150:9000',
       //path: '/',
       //httpOnly: true,
-      expires: new Date(new Date().valueOf() + 3024000),
-      //maxAge: 180,
+      maxAge: 14 * 24 * 60 * 60,
       sameSite: 'none',
       secure: true,
     });
