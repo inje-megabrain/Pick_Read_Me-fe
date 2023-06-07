@@ -7,7 +7,9 @@ const Header = () => {
 
   const navigate = useNavigate();
 
-  const handleWrite = () => {};
+  const handleWrite = () => {
+    navigate('/write');
+  };
 
   const handleMyPage = () => {
     navigate('/mypage/profile');
