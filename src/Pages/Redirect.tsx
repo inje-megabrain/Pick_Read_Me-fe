@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { setAccessToken, setRefreshToken } from '../Api/client';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Redirect = () => {
+  const navigate = useNavigate();
   useEffect(() => {
     const param = new URLSearchParams(location.search);
     const access = param.get('accessToken');
@@ -13,11 +14,18 @@ const Redirect = () => {
     if (refresh) {
       setRefreshToken(refresh);
     }
+    navigate('/');
   }, []);
 
   return (
     <>
-      <h2>Redirect 페이지</h2>
+      <button
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        Redirect 페이지
+      </button>
     </>
   );
 };
