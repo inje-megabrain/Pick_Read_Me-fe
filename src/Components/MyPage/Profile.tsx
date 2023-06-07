@@ -12,8 +12,8 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="w-full mt-14 mb-10 flex justify-center items-center">
-      <div className="p-7 border-2 rounded-2xl mr-10 bg-slate-400">
+    <div className="mt-14 mb-10 flex justify-center items-center w-full">
+      <div className="p-5 border-2 rounded-2xl mr-10 bg-slate-400 w-96 h-52 flex flex-col justify-center">
         <div className="mb-5 text-2xl">{auth?.name}</div>
         <div className="mb-5 text-lg">
           {auth?.email === 'null'

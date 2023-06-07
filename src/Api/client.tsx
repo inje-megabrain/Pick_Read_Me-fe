@@ -31,6 +31,7 @@ client.interceptors.response.use(
     return res;
   },
   (error) => {
+    //console.log(error);
     if (error.response.status === 401) {
       if (error.response.data.includes('만료')) {
         //"리프레시 토큰 만료" , 엑세스, 리프레시 둘 다 없음
