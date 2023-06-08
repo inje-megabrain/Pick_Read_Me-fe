@@ -8,9 +8,12 @@ const Logout = () => {
     if (getCookie('refreshToken')) {
       logout().then(() => {
         localStorage.removeItem('accessToken');
+        console.log('홍');
+        navigate('/');
       });
     } else {
       localStorage.removeItem('accessToken');
+      console.log('힝');
     }
 
     if (!localStorage.getItem('accessToken')) {
@@ -22,6 +25,7 @@ const Logout = () => {
     <>
       <div>
         <button onClick={handleLogout}>로그아웃</button>
+        {localStorage.getItem('accessToken')}
       </div>
     </>
   );
