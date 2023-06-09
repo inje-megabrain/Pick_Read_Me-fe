@@ -1,11 +1,11 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { getCookie, setCookie } from './Cookies';
 import { BASE_URL } from './ constants';
 import logout from './logout';
 import fetchAccess from './fetchAccess';
 
-const ACCESS_HEADER_KEY = 'Authorization';
-const REFRESH_HEADER_KEY = 'AuthorizationSecret';
+const ACCESS_HEADER_KEY = 'accessToken';
+const REFRESH_HEADER_KEY = 'refreshToken';
 const TOKEN_TYPE = 'Bearer';
 
 const client = axios.create({
@@ -33,27 +33,28 @@ client.interceptors.response.use(
   (error) => {
     //console.log(error);
     if (error.response.status === 401) {
-      if (error.response.data.includes('만료')) {
-        //"리프레시 토큰 만료" , 엑세스, 리프레시 둘 다 없음
-        localStorage.clear();
-        window.location.reload();
-        //logout().then(() => console.log('로그아웃'));
+      if (error.response.data.includes('리프래시 토큰 만료')) {
+        // refresh 토큰 만료, refresh 토큰 없음
+        //window.location.reload();
+        logout().then(() => console.log('로그아웃'));
+        console.log('잉?');
+      }
+      if (error.response.data.includes('access')) {
+        // 엑세스 토큰 만료, 없음
+        fetchAccess()
+          .then((v) => {
+            console.log('fetchAccess : ' + v.data);
+            localStorage.setItem('accessToken', v.data);
+          })
+          .then(() => {
+            //window.location.reload();
+          });
       }
       if (error.response.data.includes('IP')) {
         logout()
           .then(() => console.log('등록된 IP가 있어 로그아웃합니다.'))
           .then(() => {
-            window.location.reload();
-          });
-      }
-      if (error.response.data.includes('Expired')) {
-        localStorage.removeItem('accessToken');
-        fetchAccess()
-          .then((v) => {
-            localStorage.setItem('accessToken', v.data);
-          })
-          .then(() => {
-            window.location.reload();
+            //window.location.reload();
           });
       }
     }
@@ -87,7 +88,8 @@ export const setAccessToken = (token: string) => {
       ACCESS_HEADER_KEY
     ] = `${TOKEN_TYPE} ${token}`;
     //LocalStorage 저장
-    window.localStorage.setItem('accessToken', token);
+    localStorage.setItem('accessToken', token);
+    console.log('저장 완료');
   } else {
     delete client.defaults.headers.common[ACCESS_HEADER_KEY];
   }

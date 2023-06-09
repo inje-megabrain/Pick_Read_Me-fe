@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import Profile from '../Components/MyPage/Profile';
 import MyPost from '../Pages/MyPost';
 import Like from '../Pages/Like';
+import Write from '../Pages/Write';
 
 const AppRouter = () => {
   return (
@@ -34,6 +35,7 @@ const AppRouter = () => {
             <Route path="delete" element={<Delete />} />
           </Route>
 
+          <Route path="/write" element={<Write />} />
           <Route path="/login" element={<Login />} />
           <Route path="/redirect" element={<Redirect />} />
 

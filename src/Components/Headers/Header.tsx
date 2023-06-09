@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import accessAtom from '../../Atoms/access';
+import { useRefresh } from '../../Hooks/useRefresh';
 
 const Header = () => {
   const auth = useRecoilValue(accessAtom);
 
   const navigate = useNavigate();
 
-  const handleWrite = () => {};
+  const handleWrite = () => {
+    navigate('/write');
+  };
 
   const handleMyPage = () => {
     navigate('/mypage/profile');
@@ -16,6 +19,7 @@ const Header = () => {
   const handleLogin = () => {
     navigate('/login');
   };
+  useRefresh();
 
   return (
     <div>
