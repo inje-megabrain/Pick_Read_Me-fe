@@ -23,8 +23,8 @@ const Header = () => {
 
   return (
     <div>
-      <div className="bg-zinc-500 h-24 flex items-center justify-between px-10">
-        <div className="text-3xl">PICK README</div>
+      <div className="bg-violet-200 h-24 flex items-center justify-between px-10">
+        <div className="text-3xl text-secondary">PICK README</div>
         <div>
           {auth ? (
             <>
@@ -44,7 +44,7 @@ const Header = () => {
           ) : (
             <button
               onClick={handleLogin}
-              className="btn btn-outline btn-primary"
+              className="btn btn-outline btn-secondary"
             >
               Login
             </button>
