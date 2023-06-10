@@ -10,6 +10,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
     "@typescript-eslint/parser": "^5.59.2",
+    "@uiw/react-md-editor": "^3.23.3",
     "axios": "^1.4.0",
     "daisyui": "^2.51.6",
     "eslint": "^8.40.0",
