@@ -22,10 +22,6 @@ export default function fetchUsers() {
       })
       .catch((err) => {
         console.log('fetchUser 에러 ' + err);
-        console.log('accessToken: ' + localStorage.getItem('accessToken')); //null
-        console.log(
-          'header : ' + client.defaults.headers.common['accessToken'] //잘뜸..
-        );
       });
   });
 }

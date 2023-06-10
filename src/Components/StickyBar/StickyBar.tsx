@@ -1,7 +1,7 @@
 const StickyBar = () => {
   return (
     <>
-      <div className="bg-zinc-100 float-left w-1/5">StickyBar</div>
+      <div className="bg-zinc-100 float-left w-1/6 h-full">StickyBar</div>
     </>
   );
 };

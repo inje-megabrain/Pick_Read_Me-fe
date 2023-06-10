@@ -20,7 +20,7 @@ const Main = () => {
       <Header />
       <div className="flex justify-center">
         {selectedId && <Backdrop />}
-        <div className="bg-blue-200 w-4/5 h-screen">
+        <div className="w-4/5 h-screen">
           <Outlet />
           <StickyBar />
         </div>
