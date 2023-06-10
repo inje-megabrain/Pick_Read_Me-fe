@@ -1,5 +1,6 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import issuePost from '../Api/issuePost';
+import fetchReadme from '../Api/fetchReadme';
 
 export const useIssuePost = () => {
   const queryClient = useQueryClient();
@@ -13,4 +14,16 @@ export const useIssuePost = () => {
     },
   });
   return mutation;
+};
+
+export const useFetchReadme = (name: string, enabled: boolean) => {
+  return useQuery<string>(['readme'], () => fetchReadme(name), {
+    enabled: enabled,
+    onSuccess: () => {
+      console.log('useFetchReadme 성공');
+    },
+    onError: () => {
+      console.log('useFetchReadme 실패');
+    },
+  });
 };

@@ -4,12 +4,7 @@ import { getCookie } from './Cookies';
 export default function logout() {
   return new Promise((resolve) => {
     client
-      .delete('api/logout', {
-        headers: {
-          accessToken: localStorage.getItem('accessToken'),
-          refreshToken: getCookie('refreshToken'),
-        },
-      })
+      .delete('api/logout')
       .then((res) => {
         resolve(res.data);
       })
