@@ -1,15 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import logout from '../../Api/logout';
-import { getCookie } from '../../Api/Cookies';
+import { getCookie, removeCookie, setCookie } from '../../Api/Cookies';
 
 const Logout = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     if (getCookie('refreshToken')) {
       logout().then(() => {
-        localStorage.removeItem('accessToken');
-        console.log('홍');
-        navigate('/');
+        removeCookie('refreshToken'); // 리프레시 토큰 삭제
+        localStorage.removeItem('accessToken'); //액세스 토큰 삭제
+        console.log('리프레시, 액세스 토큰 삭제 완료');
+        window.location.href = '/'; // navigate('/')으로 하면 reload가 되지 않아 login 버튼 활성화가 안됨.
       });
     } else {
       localStorage.removeItem('accessToken');

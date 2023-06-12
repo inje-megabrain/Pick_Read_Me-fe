@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useFetchUser } from '../../Query/user';
 import { useRecoilState } from 'recoil';
 import authAtom from '../../Atoms/auth';
 import fetchUsers from '../../Api/fetchUser';

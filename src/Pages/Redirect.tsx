@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { setAccessToken, setRefreshToken } from '../Api/client';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 
 const Redirect = () => {
   const navigate = useNavigate();

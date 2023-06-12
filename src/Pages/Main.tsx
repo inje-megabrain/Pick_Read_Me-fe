@@ -1,7 +1,5 @@
 import Header from '../Components/Headers/Header';
-import MainScroll from './MainScroll';
 import StickyBar from '../Components/StickyBar/StickyBar';
-import MainScrollHeader from '../Components/Headers/MainScrollHeader';
 import { Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import postAtom from '../Atoms/post';
