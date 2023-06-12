@@ -1,10 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import accessAtom from '../../Atoms/access';
 import { useRefresh } from '../../Hooks/useRefresh';
 
 const Header = () => {
-  const auth = useRecoilValue(accessAtom);
+  const auth = localStorage.getItem('accessToken');
 
   const navigate = useNavigate();
 

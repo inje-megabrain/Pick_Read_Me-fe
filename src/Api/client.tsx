@@ -30,24 +30,30 @@ client.interceptors.response.use(
     }
     return res;
   },
-  (error) => {
+  async (error) => {
     //console.log(error);
     if (error.response.status === 401) {
-      if (error.response.data.includes('리프래시 토큰 만료')) {
+      if (error.response.data.includes('refresh')) {
         // refresh 토큰 만료, refresh 토큰 없음
-        //window.location.reload();
-        logout().then(() => console.log('로그아웃'));
+        logout()
+          .then(() => console.log('로그아웃'))
+          .then(() => (window.location.href = '/'));
         console.log('잉?');
       }
       if (error.response.data.includes('access')) {
         // 엑세스 토큰 만료, 없음
-        fetchAccess()
-          .then((v) => {
-            console.log('fetchAccess : ' + v.data);
+        await fetchAccess()
+          .then(async (v) => {
+            error.config.headers = {
+              'Content-Type': 'application/json',
+              accessToken: v.data,
+            };
             localStorage.setItem('accessToken', v.data);
+            const response = await axios.request(error.config);
+            return response;
           })
           .then(() => {
-            //window.location.reload();
+            window.location.reload();
           });
       }
       if (error.response.data.includes('IP')) {
@@ -74,6 +80,7 @@ export const setRefreshToken = (token: string) => {
       //path: '/',
       //httpOnly: true,
       maxAge: 14 * 24 * 60 * 60,
+      //maxAge: 180,
       sameSite: 'none',
       secure: true,
     });
