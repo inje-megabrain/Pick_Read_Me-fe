@@ -11,7 +11,7 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="min-w-0 bg-slate-200 w-96 mb-32 shadow-xl rounded-lg mt-52 mx-10 flex justify-center">
+    <div className="min-w-0 h-fit pb-32 bg-slate-200 w-96 shadow-xl rounded-lg mt-36 mx-10 flex justify-center">
       <div className="shadow-xl rounded-full align-middle border-none absolute max-w-150-px -mt-16">
         <img
           className="rounded-full w-36 h-36"

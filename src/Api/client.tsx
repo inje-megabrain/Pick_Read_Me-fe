@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie, setCookie } from './Cookies';
+import { getCookie, removeCookie, setCookie } from './Cookies';
 import { BASE_URL } from './ constants';
 import logout from './logout';
 import fetchAccess from './fetchAccess';
@@ -36,9 +36,14 @@ client.interceptors.response.use(
       if (error.response.data.includes('refresh')) {
         // refresh 토큰 만료, refresh 토큰 없음
         logout()
-          .then(() => console.log('로그아웃'))
+          .then(() => {
+            console.log('로그아웃');
+            removeCookie('refreshToken');
+          })
           .then(() => (window.location.href = '/'));
-        console.log('잉?');
+        console.log(
+          'RefreshToken 만료로 로그아웃 합니다. 다시 로그인해주세요.'
+        );
       }
       if (error.response.data.includes('access')) {
         // 엑세스 토큰 만료, 없음
@@ -58,7 +63,10 @@ client.interceptors.response.use(
       }
       if (error.response.data.includes('IP')) {
         logout()
-          .then(() => console.log('등록된 IP가 있어 로그아웃합니다.'))
+          .then(() => {
+            console.log('등록된 IP가 있어 로그아웃합니다.');
+            removeCookie('refreshToken');
+          })
           .then(() => {
             //window.location.reload();
           });
