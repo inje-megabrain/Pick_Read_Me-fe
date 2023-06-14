@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import '../Nav/Nav.css';
+import { Link } from 'react-router-dom';
 
 interface NavLinkProps {
   children: ReactNode;
@@ -9,11 +10,7 @@ interface NavLinkProps {
 const NavLinks = ({ to, children }: NavLinkProps) => {
   return (
     <>
-      <a href={to} className="w-40">
-        <span className="pl-3 py-3 w-40 text-xl text-black active:text-violet-600 hover:bg-violet-300 hover:text-violet-600 cursor-pointer rounded-md">
-          {children}
-        </span>
-      </a>
+      <Link to={to}></Link>
     </>
   );
 };

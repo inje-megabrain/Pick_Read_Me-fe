@@ -10,22 +10,34 @@ const SideNav = () => {
       <Nav>
         <NavList>
           <NavItem>
-            <NavLink to={'/'}>Home</NavLink>
+            <NavLink className="inline-block w-full" to={'/'}>
+              Home
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'profile'}>Profile</NavLink>
+            <NavLink className="inline-block w-full" to={'profile'}>
+              Profile
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'mypost'}>My Post</NavLink>
+            <NavLink className="inline-block w-full" to={'mypost'}>
+              My Post
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'like'}>Like</NavLink>
+            <NavLink className="inline-block w-full" to={'like'}>
+              Like
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'logout'}>로그아웃</NavLink>
+            <NavLink className="inline-block w-full" to={'logout'}>
+              로그아웃
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to={'delete'}>회원 탈퇴</NavLink>
+            <NavLink className="inline-block w-full" to={'delete'}>
+              회원 탈퇴
+            </NavLink>
           </NavItem>
         </NavList>
       </Nav>
