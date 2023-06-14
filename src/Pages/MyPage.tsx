@@ -10,7 +10,7 @@ const MyPage = () => {
   return (
     <div className="flex">
       <div className="w-60">
-        <div className="flex justify-start w-60 h-screen py-24 bg-slate-100">
+        <div className="flex justify-start w-60 h-screen py-24">
           <SideNav />
         </div>
       </div>
