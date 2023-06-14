@@ -65,14 +65,19 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
       if (div) {
         // Add a delay of 1 second before capturing the image
         setTimeout(async () => {
-          const canvas = await html2canvas(div, { scale: 2 });
+          const canvas = await html2canvas(div, {
+            allowTaint: true,
+            useCORS: true,
+            logging: false,
+            scale: 4,
+          });
           canvas.toBlob((blob) => {
             if (blob !== null) {
               console.log(blob);
               onImageChange(blob);
             }
           });
-        }, 5000);
+        }, 1000);
       }
     } catch (error) {
       console.log(error);
@@ -109,7 +114,7 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
         <FileInput label="File Reader Upload" onChange={onFileReaderChange} />
         <div className="w-80 h-80">
           {URLThumbnail ? (
-            <img src={URLThumbnail} alt="thumbnail" />
+            <img src={URLThumbnail} alt="thumbnail" crossOrigin="anonymous" />
           ) : (
             'urlThumbnail 미리보기'
           )}
