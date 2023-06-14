@@ -31,12 +31,9 @@ const MainScroll = () => {
                   src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                 ></img>
                 <div className="flex flex-col justify-between py-6 lg:mx-6">
-                  <a
-                    href="/"
-                    className="text-xl font-semibold text-gray-800 hover:underline"
-                  >
+                  <div className="text-xl font-semibold text-gray-800 hover:underline">
                     {item.title}
-                  </a>
+                  </div>
                   {item.content}
                   <span className="text-sm text-gray-500">BY_{item.repo}</span>
                 </div>

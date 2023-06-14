@@ -21,6 +21,7 @@ export const useIssuePost = () => {
   const mutation = useMutation(issuePost, {
     onSuccess: () => {
       console.log('useIssuePost 성공');
+      queryClient.invalidateQueries('allPost');
     },
     onError: () => {
       console.log('useIssuePost 실패');

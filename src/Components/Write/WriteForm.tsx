@@ -21,8 +21,9 @@ const WriteForm = () => {
       content: content,
       repo: repo,
       title: title,
+    }).then(() => {
+      navigate('/');
     });
-    console.log(content);
   };
   const handleCancel = () => {
     navigate('/');
