@@ -12,9 +12,10 @@ import Profile from '../Components/MyPage/Profile';
 import MyPost from '../Pages/MyPost';
 import Like from '../Pages/Like';
 import Write from '../Pages/Write';
+import { useAccess } from '../Hooks/useAccess';
 
 const AppRouter = () => {
-  const access = localStorage.getItem('accessToken');
+  const token = useAccess();
   return (
     <>
       <BrowserRouter>
@@ -23,7 +24,7 @@ const AppRouter = () => {
             <Route path="/" element={<MainScroll />} />
             <Route path="rank" element={<Rank />} />
           </Route>
-          {access ? (
+          {token ? (
             <>
               <Route path="/mypage" element={<MyPage />}>
                 <Route path="profile" element={<Profile />} />
