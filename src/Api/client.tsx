@@ -40,10 +40,12 @@ client.interceptors.response.use(
             console.log('로그아웃');
             removeCookie('refreshToken');
           })
-          .then(() => (window.location.href = '/'));
-        console.log(
-          'RefreshToken 만료로 로그아웃 합니다. 다시 로그인해주세요.'
-        );
+          .then(() => {
+            window.location.href = '/';
+            console.log(
+              'RefreshToken 만료로 로그아웃 합니다. 다시 로그인해주세요.'
+            );
+          });
       }
       if (error.response.data.includes('access')) {
         // 엑세스 토큰 만료, 없음
@@ -68,7 +70,7 @@ client.interceptors.response.use(
             removeCookie('refreshToken');
           })
           .then(() => {
-            //window.location.reload();
+            window.location.href = '/';
           });
       }
     }
