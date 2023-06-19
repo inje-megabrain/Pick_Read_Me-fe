@@ -15,8 +15,11 @@ const Header = () => {
     navigate('/mypage/profile');
   };
 
+  const gitHubURL = `http://52.78.80.150:9000/login`;
   const handleLogin = () => {
-    navigate('/login');
+    console.log('깃허브로 로그인합니다.');
+    window.location.href = gitHubURL;
+    //유저 정보 요청
   };
   useRefresh();
 
