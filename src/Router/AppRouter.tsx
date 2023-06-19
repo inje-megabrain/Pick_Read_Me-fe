@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Main from '../Pages/Main';
 import MyPage from '../Pages/MyPage';
-import Login from '../Pages/Login';
 import NotFound from '../Pages/NotFound';
 import Delete from '../Pages/Delete';
 import Redirect from '../Pages/Redirect';
@@ -36,17 +35,12 @@ const AppRouter = () => {
               <Route path="/write" element={<Write />} />
             </>
           ) : (
-            <Route path="login" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
           )}
 
-          <Route path="/login" element={<Login />} />
           <Route path="/redirect" element={<Redirect />} />
 
           <Route path="*" element={<NotFound />}></Route>
-          {/* <Route path="/" element={<Test />}>
-            <Route path="testB" element={<TestM />} />
-            <Route path="testA" element={<TestT />} />
-          </Route> */}
         </Routes>
       </BrowserRouter>
     </>
