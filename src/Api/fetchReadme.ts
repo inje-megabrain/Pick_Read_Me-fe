@@ -4,7 +4,7 @@ import client from './client';
 const fetchReadme = (name: string) => {
   return new Promise<string>((resolve) => {
     client
-      .get(`api/get/readmes?name=${'narinn-star'}`, {
+      .get(`api/get/readmes?name=${name}`, {
         headers: {
           accessToken: localStorage.getItem('accessToken'),
           refreshToken: getCookie('refreshToken'),
