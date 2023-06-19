@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import FileInput from './FileInput';
 import domtoimage from 'dom-to-image';
-import saveAs from 'file-saver';
+import { saveAs } from 'file-saver';
 
 interface ReadMe {
   repo: string;
@@ -21,7 +21,8 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
       URL.revokeObjectURL(URLThumbnail);
     }
     const url = URL.createObjectURL(fileBlob);
-    setURLThumbnail(fileBlob);
+    setURLThumbnail(url);
+    console.log(url);
   };
 
   const onImageChange = (e: Blob) => {
@@ -34,42 +35,36 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
     createImageURL(uploadimage);
   };
 
-  const capImage = async () => {
+  const capImage = () => {
     try {
       const div = divRef.current as HTMLDivElement;
       // if (div) {
-      //   // Add a delay of 1 second before capturing the image
       //   setTimeout(async () => {
-      //     const animationDuration =
-      //       window.getComputedStyle(div).animationDuration;
-      //     const durationInMilliseconds = parseFloat(animationDuration) * 1000;
-      //     await new Promise((resolve) =>
-      //       setTimeout(resolve, durationInMilliseconds)
-      //     );
-
       //     const canvas = await html2canvas(div, {
       //       allowTaint: true,
       //       useCORS: true,
       //       logging: false,
       //       scale: 4,
       //     });
-      //     // console.log(canvas.toDataURL());
+      //     console.log(canvas.toDataURL());
       //     canvas.toBlob((blob) => {
       //       if (blob !== null) {
       //         console.log(blob);
       //         onImageChange(blob);
-      //         console.log(durationInMilliseconds);
       //       }
       //     });
       //   });
       // }
       if (div) {
-        await new Promise((resolve) => setTimeout(resolve, 2000)); // 2초 동안 대기
-
-        const image = await domtoimage.toBlob(div, { bgcolor: 'white' });
-        saveAs(image, 'images.png');
-        console.log(image);
-        onImageChange(image);
+        const svgString = new XMLSerializer().serializeToString(div);
+        const blob = new Blob([svgString], { type: 'image/svg+xml' });
+        console.log(blob);
+        onImageChange(blob);
+        saveAs(blob, 'image.svg');
+        //domtoimage.toSvg(div, { bgcolor: 'white' });
+        //saveAs(image, 'images.png');
+        //console.log(image);
+        //onImageChange(image);
       }
     } catch (error) {
       console.log(error);
