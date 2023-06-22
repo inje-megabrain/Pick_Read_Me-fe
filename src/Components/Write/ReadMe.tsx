@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 // import FileInput from './FileInput';
 // import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import { useSetRecoilState } from 'recoil';
+import readmeAtom from '../../Atoms/readme';
 
 interface ReadMe {
   repo: string;
@@ -14,24 +16,15 @@ interface ReadMe {
 const ReadMe = ({ repo, clicked }: ReadMe) => {
   const { data: readme } = useFetchReadme(repo, clicked);
   const [URLThumbnail, setURLThumbnail] = useState<any>();
+  const setReadme = useSetRecoilState(readmeAtom);
   const divRef = useRef<HTMLDivElement>(null);
 
-  const createImageURL = (fileBlob: Blob) => {
-    if (URLThumbnail) {
-      URL.revokeObjectURL(URLThumbnail);
-    }
-    const url = URL.createObjectURL(fileBlob);
+  const onImageChange = (blob: Blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
     setURLThumbnail(url);
-  };
-
-  const onImageChange = (e: Blob) => {
-    const files = e;
-
-    if (!files) return;
-
-    const uploadimage = files;
-
-    createImageURL(uploadimage);
+    setReadme(blob);
+    console.log(blob);
   };
 
   const capImage = () => {
@@ -42,7 +35,6 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
         const blob = new Blob([svgString], { type: 'image/svg+xml' });
         console.log(blob);
         onImageChange(blob);
-        saveAs(blob, 'image.svg');
       }
     } catch (error) {
       console.log(error);

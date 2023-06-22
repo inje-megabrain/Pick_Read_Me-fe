@@ -12,7 +12,7 @@ const fetchReadme = (name: string) => {
       })
       .then((v) => {
         resolve(v.data);
-        console.log(v.data);
+        //console.log(v.data);
       })
       .catch((err) => {
         console.log('fetchReadme 에러 ' + err);

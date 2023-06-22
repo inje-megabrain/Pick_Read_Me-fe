@@ -2,12 +2,16 @@ import { useState } from 'react';
 import { useIssuePost } from '../../Query/post';
 import { useNavigate } from 'react-router-dom';
 import ReadMe from './ReadMe';
+import { useRecoilValue } from 'recoil';
+import readmeAtom from '../../Atoms/readme';
 
 const WriteForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentsCount, setContentsCount] = useState(0);
   const [repo, setRepo] = useState('');
+  const readme = useRecoilValue<Blob>(readmeAtom);
+
   const navigate = useNavigate();
   const { mutateAsync: create } = useIssuePost();
 
@@ -22,6 +26,7 @@ const WriteForm = () => {
       content: content,
       repo: repo,
       title: title,
+      file: readme,
     }).then(() => {
       navigate('/');
     });
