@@ -6,6 +6,7 @@ import ReadMe from './ReadMe';
 const WriteForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [contentsCount, setContentsCount] = useState(0);
   const [repo, setRepo] = useState('');
   const navigate = useNavigate();
   const { mutateAsync: create } = useIssuePost();
@@ -36,6 +37,9 @@ const WriteForm = () => {
   };
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    setContentsCount(
+      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2').length
+    );
   };
   return (
     <>
@@ -72,7 +76,12 @@ const WriteForm = () => {
           placeholder="Contents"
           value={content}
           onChange={onChangeContent}
+          maxLength={500}
         ></textarea>
+        <div className="flex justify-end" style={{ color: '#9CA3AF' }}>
+          <span>{contentsCount}</span>
+          <span>/500자</span>
+        </div>
         <div className="flex mt-5">
           <button
             className="btn btn-outline btn-accent p-1 px-4 font-semibold cursor-pointer ml-auto"

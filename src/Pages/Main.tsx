@@ -15,8 +15,8 @@ const Main = () => {
   return (
     <div>
       <Header />
+      {selectedId && <Backdrop />}
       <div className="flex justify-center">
-        {selectedId && <Backdrop />}
         <div className="w-4/5 h-screen">
           <Outlet />
         </div>

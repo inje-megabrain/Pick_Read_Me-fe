@@ -14,10 +14,10 @@ const MainScroll = () => {
       <MainScrollHeader />
       <div className="h-screen float-left w-full mx-auto my-0">
         <AnimatePresence>
-          <div className="grid grid-cols-1 gap-8 mt-4 md:mt-8 md:grid-cols-2 bg-slate-200">
+          <div className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2">
             {posts?.map((item: IPost) => (
               <motion.div
-                className="lg:flex mb-5"
+                className="lg:flex mb-5 h-56"
                 key={item.id}
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -30,13 +30,11 @@ const MainScroll = () => {
                   className="object-cover w-full h-56 rounded-lg lg:w-64"
                   src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                 ></img>
-                <div className="flex flex-col justify-between py-6 lg:mx-6">
+                <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
                   <div className="text-xl font-semibold text-gray-800 hover:underline">
                     {item.title}
                   </div>
-                  <p className="text-ellipsis overflow-hidden ...">
-                    {item.content}
-                  </p>
+                  <p className="line-clamp-4">{item.content}</p>
                   <span className="text-sm text-gray-500">BY_{item.repo}</span>
                 </div>
               </motion.div>
