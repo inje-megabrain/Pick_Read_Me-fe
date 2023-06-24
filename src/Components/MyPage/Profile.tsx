@@ -15,7 +15,7 @@ const Profile = () => {
       <div className="shadow-xl rounded-full align-middle border-none absolute max-w-150-px -mt-16">
         <img
           className="rounded-full w-36 h-36"
-          src={auth?.repo}
+          src={auth?.profile}
           alt="Profile Image"
         ></img>
       </div>
@@ -44,7 +44,7 @@ const Profile = () => {
         <div className="divider px-10"></div>
 
         <div className="flex justify-center">
-          <a href={auth?.profile} target="_blank" className="block">
+          <a href={auth?.repo} target="_blank" className="block">
             <VscGithub className="w-8 h-8 mr-3" />
           </a>
         </div>
