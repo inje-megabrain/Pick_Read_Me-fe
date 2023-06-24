@@ -1,6 +1,6 @@
 import { useFetchReadme } from '../../Query/post';
 import MDEditor from '@uiw/react-md-editor';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import html2canvas from 'html2canvas';
 // import FileInput from './FileInput';
 // import domtoimage from 'dom-to-image';
@@ -15,16 +15,17 @@ interface ReadMe {
 
 const ReadMe = ({ repo, clicked }: ReadMe) => {
   const { data: readme } = useFetchReadme(repo, clicked);
-  const [URLThumbnail, setURLThumbnail] = useState<any>();
   const setReadme = useSetRecoilState(readmeAtom);
   const divRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    capImage();
+  }, []);
+
   const onImageChange = (blob: Blob) => {
     if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    setURLThumbnail(url);
     setReadme(blob);
-    console.log(blob);
+    //console.log(blob);
   };
 
   const capImage = () => {
@@ -42,26 +43,21 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
   };
 
   return (
-    <>
-      <div className="mx-auto mt-10 w-10/12 flex flex-col text-gray-800 border-gray-300 p-4 shadow-lg max-w-2xl">
-        <div>
-          {readme ? (
-            <>
-              <div ref={divRef}>
-                <MDEditor.Markdown source={readme} />
-              </div>
-              <button
-                className="btn btn-outline btn-secondary"
-                onClick={capImage}
-              >
-                이얍
-              </button>
-            </>
-          ) : (
-            <>가져올 Repository명을 입력해주시고, Readme 버튼을 눌러주세요!</>
-          )}
-        </div>
-        <div className="w-80 h-80">
+    <div className="mx-auto mt-10 w-10/12 flex flex-col text-gray-800 border-gray-300 p-4 shadow-lg max-w-2xl">
+      {readme ? (
+        <>
+          <div ref={divRef}>
+            <MDEditor.Markdown source={readme} />
+          </div>
+          <button className="btn btn-outline btn-secondary" onClick={capImage}>
+            이얍
+          </button>
+        </>
+      ) : (
+        <>가져올 Repository명을 입력해주시고, Readme 버튼을 눌러주세요!</>
+      )}
+
+      {/* <div className="w-80 h-80">
           {URLThumbnail ? (
             <img
               src={URLThumbnail}
@@ -72,10 +68,9 @@ const ReadMe = ({ repo, clicked }: ReadMe) => {
           ) : (
             ''
           )}
-        </div>
-        {/* <FileInput label="create Object URL Upload" onChange={onImageChange} /> */}
-      </div>
-    </>
+        </div> */}
+      {/* <FileInput label="create Object URL Upload" onChange={onImageChange} /> */}
+    </div>
   );
 };
 

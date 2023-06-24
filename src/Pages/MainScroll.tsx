@@ -35,7 +35,9 @@ const MainScroll = () => {
                     {item.title}
                   </div>
                   <p className="line-clamp-4">{item.content}</p>
-                  <span className="text-sm text-gray-500">BY_{item.repo}</span>
+                  <span className="text-sm text-gray-500">
+                    BY_{item.memberName}
+                  </span>
                 </div>
               </motion.div>
             ))}

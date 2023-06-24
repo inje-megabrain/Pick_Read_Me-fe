@@ -19,6 +19,7 @@ const WriteForm = () => {
 
   const handleReadme = () => {
     setClicked(true);
+
     console.log('리드미 가져옴니당');
   };
   const handlePost = () => {

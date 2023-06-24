@@ -1,8 +1,8 @@
 export interface IPost {
   content: string;
   id: number;
-  member: Object;
-  postCreatedAt: Date;
+  memberName: string;
+  //postCreatedAt: Date;
   postUpdatedAt: Date;
   post_like: number;
   repo: string;
