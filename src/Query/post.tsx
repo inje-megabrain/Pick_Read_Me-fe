@@ -2,7 +2,8 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import issuePost from '../Api/issuePost';
 import fetchReadme from '../Api/fetchReadme';
 import fetchPost from '../Api/fetchPost';
-import { IPost } from 'src/Types/posts';
+import { IPost } from '../Types/posts';
+import { useSetRecoilState } from 'recoil';
 
 export const useFetchPost = () => {
   return useQuery<IPost[]>(['allPost'], () => fetchPost(), {

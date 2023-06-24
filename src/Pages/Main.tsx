@@ -1,5 +1,4 @@
 import Header from '../Components/Headers/Header';
-import StickyBar from '../Components/StickyBar/StickyBar';
 import { Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import postAtom from '../Atoms/post';
@@ -16,11 +15,10 @@ const Main = () => {
   return (
     <div>
       <Header />
+      {selectedId && <Backdrop />}
       <div className="flex justify-center">
-        {selectedId && <Backdrop />}
         <div className="w-4/5 h-screen">
           <Outlet />
-          <StickyBar />
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ import Delete from '../Pages/Delete';
 import Redirect from '../Pages/Redirect';
 import MainScroll from '../Pages/MainScroll';
 import Rank from '../Pages/Rank';
-import Logout from '../Components/MyPage/Logout';
 import Profile from '../Components/MyPage/Profile';
 import MyPost from '../Pages/MyPost';
 import Like from '../Pages/Like';
@@ -29,7 +28,6 @@ const AppRouter = () => {
                 <Route path="profile" element={<Profile />} />
                 <Route path="myPost" element={<MyPost />} />
                 <Route path="like" element={<Like />} />
-                <Route path="logout" element={<Logout />} />
                 <Route path="delete" element={<Delete />} />
               </Route>
               <Route path="/write" element={<Write />} />

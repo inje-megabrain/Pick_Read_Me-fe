@@ -2,11 +2,16 @@ import { useState } from 'react';
 import { useIssuePost } from '../../Query/post';
 import { useNavigate } from 'react-router-dom';
 import ReadMe from './ReadMe';
+import { useRecoilValue } from 'recoil';
+import readmeAtom from '../../Atoms/readme';
 
 const WriteForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [contentsCount, setContentsCount] = useState(0);
   const [repo, setRepo] = useState('');
+  const readme = useRecoilValue<Blob>(readmeAtom);
+
   const navigate = useNavigate();
   const { mutateAsync: create } = useIssuePost();
 
@@ -14,6 +19,7 @@ const WriteForm = () => {
 
   const handleReadme = () => {
     setClicked(true);
+
     console.log('리드미 가져옴니당');
   };
   const handlePost = () => {
@@ -21,6 +27,7 @@ const WriteForm = () => {
       content: content,
       repo: repo,
       title: title,
+      file: readme,
     }).then(() => {
       navigate('/');
     });
@@ -36,6 +43,9 @@ const WriteForm = () => {
   };
   const onChangeContent = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    setContentsCount(
+      event.target.value.replace(/[\0-\x7f]|([0-\u07ff]|(.))/g, '$&$1$2').length
+    );
   };
   return (
     <>
@@ -72,7 +82,12 @@ const WriteForm = () => {
           placeholder="Contents"
           value={content}
           onChange={onChangeContent}
+          maxLength={500}
         ></textarea>
+        <div className="flex justify-end" style={{ color: '#9CA3AF' }}>
+          <span>{contentsCount}</span>
+          <span>/500자</span>
+        </div>
         <div className="flex mt-5">
           <button
             className="btn btn-outline btn-accent p-1 px-4 font-semibold cursor-pointer ml-auto"
