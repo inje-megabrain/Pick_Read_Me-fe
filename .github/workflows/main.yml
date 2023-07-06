@@ -27,9 +27,9 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Make Zip file
-        run: zip -r ./$GITHUB_SHA.zip build/
-        shell: bash
+      - name: Show Folder
+        run: |
+          ls -al
         
       - name: Deploy
         env:
