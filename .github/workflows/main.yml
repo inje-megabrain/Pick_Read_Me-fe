@@ -32,16 +32,9 @@ jobs:
         
       - name: Build
         run: yarn build
-        
-      - name: Show Folder
-        run: |
-          ls -al
           
       - name: Include appspec.yml
         run: mv appspec.yml ./build
-        
-      - name: Include Scripts
-        run: mv scripts ./build
         
       - name: Make Zip File
         run: zip -r ./$GITHUB_SHA.zip build/
@@ -62,4 +55,13 @@ jobs:
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
             --ignore-hidden-files \
             --s3-location s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip \
-            --source .
+            --source ./$GITHUB_SHA.zip
+            
+      # S3 버킷에 있는 파일을 대상으로 CodeDeploy 실행
+      - name: Deploy to AWS EC2 from S3
+        run: |
+          aws deploy create-deployment \
+            --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
+            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
