@@ -4,6 +4,7 @@ import fetchReadme from '../Api/fetchReadme';
 import fetchPost from '../Api/fetchPost';
 import { IPost } from '../Types/posts';
 import { useSetRecoilState } from 'recoil';
+import fetchMyPost from '../Api/fetchMyPost';
 
 export const useFetchPost = () => {
   return useQuery<IPost[]>(['allPost'], () => fetchPost(), {
@@ -39,6 +40,17 @@ export const useFetchReadme = (name: string, enabled: boolean) => {
     },
     onError: () => {
       console.log('useFetchReadme 실패');
+    },
+  });
+};
+
+export const useFetchMyPost = () => {
+  return useQuery<IPost[]>(['myPost'], () => fetchMyPost(), {
+    onSuccess: () => {
+      console.log('useFetchMyPost 성공');
+    },
+    onError: () => {
+      console.log('useFetchMyPost 실패');
     },
   });
 };
