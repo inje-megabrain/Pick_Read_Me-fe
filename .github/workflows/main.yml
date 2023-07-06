@@ -27,6 +27,10 @@ jobs:
       - name: Build
         run: yarn build
         
+      - name: Make Zip file
+        run: zip -r ./$GITHUB_SHA.zip build/
+        shell: bash
+        
       - name: Deploy
         env:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
