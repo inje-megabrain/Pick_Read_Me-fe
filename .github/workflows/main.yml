@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         
       - name: Cache node modules
         uses: actions/cache@v1
@@ -36,4 +36,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build/ s3://pick-read-me-actions-s3-bucket/
+            build s3://pick-read-me-actions-s3-bucket/
