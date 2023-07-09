@@ -36,6 +36,9 @@ jobs:
       - name: Include appspec.yml
         run: mv appspec.yml ./build
         
+      - name: Include Scripts
+        run: mv deploy.sh ./build
+        
       - name: Make Zip File
         run: zip -r ./$GITHUB_SHA.zip build/
         shell: bash
@@ -59,4 +62,4 @@ jobs:
             --application-name ${{ env.CODE_DEPLOY_APPLICATION_NAME }} \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
             --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
-            --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+            --s3-location bucket=$S3_BUCKET_NAME,fe,key=$GITHUB_SHA.zip,bundleType=zip
