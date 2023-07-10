@@ -8,10 +8,10 @@ source:  /
   overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/front
+  - object: /
+    pattern: "**"
     owner: ubuntu
     group: ubuntu
-    mode: 755
   
 hooks:
   AfterInstall:
