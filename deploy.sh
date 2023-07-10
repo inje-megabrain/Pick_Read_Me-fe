@@ -1,8 +1,1 @@
-
-REPOSITORY=/home/ubuntu/front
-
-cd $REPOSITORY 
-
-sudo yarn install 
-
-sudo npx pm2 reload all
+echo "> [$(date +%y-%m-%d/%H:%M)] Deploy React" >> /usr/local/debrains/deploy.log
