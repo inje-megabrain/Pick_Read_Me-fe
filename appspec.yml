@@ -4,7 +4,7 @@ os: linux
 files:
   
 source:  /
-  destination: /home/ubuntu/app
+  destination: /home/ubuntu/front
   overwrite: yes
 
 permissions:
