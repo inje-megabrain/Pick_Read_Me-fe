@@ -1,1 +1,1 @@
-echo "> [$(date +%y-%m-%d/%H:%M)] Deploy React" >> /usr/local/debrains/deploy.log
+echo "> [$(date +%y-%m-%d/%H:%M)] Deploy React" >> /usr/local/deploy.log
