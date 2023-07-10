@@ -8,8 +8,13 @@ source:  /
   overwrite: yes
 
 permissions:
+  - object: /home/ubuntu/front
+    owner: ubuntu
+    group: ubuntu
+    mode: 755
   
-object: /
-  pattern: "**"
-  owner: ubuntu
-  group: ubuntu
+hooks:
+  AfterInstall:
+    - location: deploy.sh
+      timeout: 60
+      runas: ubuntu
