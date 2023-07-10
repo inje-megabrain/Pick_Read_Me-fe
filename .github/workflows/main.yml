@@ -33,11 +33,6 @@ jobs:
       - name: Build
         run: yarn build
           
-      - name: Include appspec.yml
-        run: mv appspec.yml ./build
-        
-      - name: Include Scripts
-        run: mv deploy.sh ./build
         
       - name: Make Zip File
         run: zip -r ./$GITHUB_SHA.zip build/
