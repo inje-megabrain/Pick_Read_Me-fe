@@ -6,8 +6,8 @@ import { IPost } from '../Types/posts';
 import { useSetRecoilState } from 'recoil';
 import fetchMyPost from '../Api/fetchMyPost';
 
-export const useFetchPost = () => {
-  return useQuery<IPost[]>(['allPost'], () => fetchPost(), {
+export const useFetchPost = (page: number) => {
+  return useQuery<IPost[], unknown>(['posts'], () => fetchPost(page), {
     onSuccess: () => {
       console.log('useFetchPost 성공');
     },

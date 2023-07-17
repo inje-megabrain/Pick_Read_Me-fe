@@ -7,6 +7,8 @@ export interface IPost {
   post_like: number;
   repo: string;
   title: string;
+  pageNumber: number;
+  pageSize: number;
 }
 
 export interface IMember {}
