@@ -1,33 +1,38 @@
-// import { useInfiniteQuery } from "react-query";
+// import { useState, useEffect } from 'react';
+// import fetchPost from '../Api/fetchPost';
 
-// const useInfinite = () => {
-//     const getPageBoard = async ({pageParam = 0}) => {
-//         const res = await api.get(``);
+// const useInfinite = (pageNum = 1) => {
+//   const [results, setResults] = useState([]);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [isError, setIsError] = useState(false);
+//   const [error, setError] = useState({});
+//   const [hasNextPage, setHasNextPage] = useState(false);
 
-//     return {
-//         // 실제 데이터
+//   useEffect(() => {
+//     setIsLoading(true);
+//     setIsError(false);
+//     setError({});
 
-//         // 반환 값에 현재 페이지 넘겨주기
+//     const controller = new AbortController();
+//     const { signal } = controller;
 
-//         // 페이지가 마지막인지 알려주는 서버에서 넘겨준 true/false 값
+//     fetchPost(pageNum, { signal })
+//       .then((data) => {
+//         setResults((prev) => [...prev, ...data]);
+//         setHasNextPage(Boolean(data.length));
+//         setIsLoading(false);
+//       })
+//       .catch((e) => {
+//         setIsLoading(false);
+//         if (signal.aborted) return;
+//         setIsError(true);
+//         setError({ message: e.message });
+//       });
 
-//     }
-//     }
+//     return () => controller.abort();
+//   }, [pageNum]);
 
-// const {
-//     data:getBoard,
-//     fetchNextPage: getNextPage,
-//     isSuccess: getBoardIsSuccess,
-//     hasNextPage: getNextPageIsPossible,
-// } = useInfiniteQuery(['page_board_list'], /*api호출*/, {
-//     getNextPageParam: (lastPage, pages) => {
-//         //lastPage와 pages는 콜백 함수에서 리턴한 값
-//         //lastPage : 직전에 반환된 리턴 값, pages : 여태 받아온 전체 페이지
-//         if(!lastPage.isLast) return lastPage.current_page + 1;
-//         //마지막 페이지면 undefined가 리턴되어 hasNextPage가 false가 됨
-//         return undefined;
-//     },
-// });
-//     return {getBoard, getNextPage, getBoardIsSuccess, getNextPageIsPossible};
+//   return { isLoading, isError, error, results, hasNextPage };
+// };
 
-// }
+// export default useInfinite;
