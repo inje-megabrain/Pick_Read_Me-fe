@@ -16,7 +16,7 @@ const AppRouter = () => {
   const token = useAccess();
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/frontend">
         <Routes>
           <Route path="/" element={<Main />}>
             <Route path="/" element={<MainScroll />} />
