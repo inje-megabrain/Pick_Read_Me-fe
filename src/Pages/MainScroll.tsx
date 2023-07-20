@@ -2,13 +2,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRecoilState } from 'recoil';
 import postAtom from '../Atoms/post';
 import MainScrollHeader from '../Components/Headers/MainScrollHeader';
-import { IPost } from 'src/Types/posts';
+import { IPost, PageInfo } from 'src/Types/posts';
 import { useIntersectionObserver } from '../Hooks/useIntersectionObserver';
 import { useInfinite } from '../Query/post';
 
 const MainScroll = () => {
   const [selectedId, setSelectedId] = useRecoilState(postAtom);
-  //const { data } = useFetchPost(1);
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useInfinite();
   // if (isLoading) return <h3> 로딩중</h3>;
@@ -18,42 +17,44 @@ const MainScroll = () => {
     hasNextPage,
     fetchNextPage,
   });
-  console.log('data.pages[0] ', data?.pages[0].content);
 
   return (
     <>
       <MainScrollHeader />
       <div className="h-screen float-left w-full mx-auto my-0">
         <AnimatePresence>
-          <div
-            ref={setTarget}
-            className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2"
-          >
-            {data?.pages[0].content &&
-              data.pages[0].content.map((pg: IPost) => (
-                <motion.div
-                  className="lg:flex mb-5 h-56"
-                  key={pg.id}
-                  initial={{ y: 10, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: -10, opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  layoutId={pg.id?.toString()}
-                  onClick={() => setSelectedId(pg.id?.toString())}
-                >
-                  <img
-                    className="object-cover w-full h-56 rounded-lg lg:w-64"
-                    src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                  ></img>
-                  <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
-                    <div className="text-xl font-semibold text-gray-800 hover:underline">
-                      {pg.title}
+          <div className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2">
+            {data?.pages.map((page: PageInfo) => {
+              return page.content.map((item: IPost) => {
+                return (
+                  <motion.div
+                    className="lg:flex mb-5 h-56"
+                    ref={setTarget}
+                    key={item.id}
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    layoutId={item.id?.toString()}
+                    onClick={() => setSelectedId(item.id?.toString())}
+                  >
+                    <img
+                      className="object-cover w-full h-56 rounded-lg lg:w-64"
+                      src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                    ></img>
+                    <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
+                      <div className="text-xl font-semibold text-gray-800 hover:underline">
+                        {item.title}
+                      </div>
+                      <p className="line-clamp-4">{item.content}</p>
+                      <span className="text-sm text-gray-500">
+                        BY_{item.owner}
+                      </span>
                     </div>
-                    <p className="line-clamp-4">{pg.content}</p>
-                    <span className="text-sm text-gray-500">BY_{pg.owner}</span>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              });
+            })}
           </div>
         </AnimatePresence>
         <AnimatePresence>
