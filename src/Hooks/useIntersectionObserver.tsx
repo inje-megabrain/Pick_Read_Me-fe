@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { InfiniteQueryObserverResult } from 'react-query';
+
 interface IuseIntersectionObserverProps {
   threshold?: number;
   hasNextPage: boolean | undefined;
@@ -11,7 +12,7 @@ export const useIntersectionObserver = ({
   hasNextPage,
   fetchNextPage,
 }: IuseIntersectionObserverProps) => {
-  const [target, setTarget] = useState<HTMLDivElement | null | undefined>(null);
+  const [target, setTarget] = useState<HTMLDivElement | null>(null);
 
   const observerCallback: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -29,7 +30,9 @@ export const useIntersectionObserver = ({
     });
 
     observer.observe(target);
+
     return () => observer.unobserve(target);
-  }, [observerCallback, threshold, target]);
+  }, [observerCallback, threshold, target, hasNextPage, fetchNextPage]);
+
   return { setTarget };
 };
