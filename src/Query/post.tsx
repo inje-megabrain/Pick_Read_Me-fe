@@ -63,14 +63,13 @@ export const useFetchMyPost = () => {
 export const useInfinite = () => {
   return useInfiniteQuery<IPost[] | any>(
     ['posts'],
-    ({ pageParam = 1 }) => fetchPost(pageParam),
+    ({ pageParam = 1 }) => fetchPost({ page: pageParam }),
     {
-      // select: (data) => ({
-      //   pages: data?.pages.flatMap((page) => page),
-      //   pageParams: data.pageParams,
-      // }),
+      select: (data) => ({
+        pages: data?.pages.flatMap((page) => page),
+        pageParams: data.pageParams,
+      }),
       getNextPageParam: (lastPage, pages) => {
-        const nextPage = pages.length + 1;
         return lastPage.nowPage !== pages[0].totalPage
           ? lastPage.nowPage + 1
           : undefined;

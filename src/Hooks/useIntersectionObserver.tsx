@@ -8,15 +8,16 @@ interface IuseIntersectionObserverProps {
 }
 
 export const useIntersectionObserver = ({
-  threshold = 0.1,
+  threshold = 0.5,
   hasNextPage,
   fetchNextPage,
 }: IuseIntersectionObserverProps) => {
   const [target, setTarget] = useState<HTMLDivElement | null>(null);
 
+  //console.log('target: ', target);
   const observerCallback: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting && hasNextPage) {
+      if (entry.intersectionRatio > 0 && hasNextPage) {
         fetchNextPage();
       }
     });
@@ -32,7 +33,7 @@ export const useIntersectionObserver = ({
     observer.observe(target);
 
     return () => observer.unobserve(target);
-  }, [observerCallback, threshold, target, hasNextPage, fetchNextPage]);
+  }, [observerCallback, threshold, target]);
 
   return { setTarget };
 };
