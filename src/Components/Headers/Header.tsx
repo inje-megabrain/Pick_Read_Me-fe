@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
 import { useRefresh } from '../../Hooks/useRefresh';
 
 const Header = () => {
@@ -15,7 +14,7 @@ const Header = () => {
     navigate('/mypage/profile');
   };
 
-  const gitHubURL = `http://52.78.80.150:9000/login`;
+  const gitHubURL = `http://52.78.80.150:9000/api/login`;
   const handleLogin = () => {
     console.log('깃허브로 로그인합니다.');
     window.location.href = gitHubURL;

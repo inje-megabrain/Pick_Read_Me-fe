@@ -3,30 +3,23 @@ import { useRecoilState } from 'recoil';
 import postAtom from '../Atoms/post';
 import MainScrollHeader from '../Components/Headers/MainScrollHeader';
 import { IPost } from 'src/Types/posts';
-import { useInfiniteQuery } from 'react-query';
-import fetchPost from '../Api/fetchPost';
 import { useIntersectionObserver } from '../Hooks/useIntersectionObserver';
+import { useInfinite } from '../Query/post';
 
 const MainScroll = () => {
   const [selectedId, setSelectedId] = useRecoilState(postAtom);
-
-  const { data, isLoading, isError, fetchNextPage, hasNextPage } =
-    useInfiniteQuery<IPost[]>(
-      ['posts'],
-      ({ pageParam = 1 }) => fetchPost(pageParam),
-      {
-        getNextPageParam: (lastPage, allPages) => {
-          return lastPage[0].pageNumber !== allPages[0][0].pageSize
-            ? lastPage[0].pageNumber + 1
-            : undefined;
-        },
-      }
-    );
+  //const { data } = useFetchPost(1);
+  const { data, fetchNextPage, hasNextPage, isLoading, isError } =
+    useInfinite();
+  // if (isLoading) return <h3> 로딩중</h3>;
+  // if (isError) return <h3>잘못된 데이터</h3>;
 
   const { setTarget } = useIntersectionObserver({
     hasNextPage,
     fetchNextPage,
   });
+  console.log('data.pages[0] ', data?.pages[0].content);
+
   return (
     <>
       <MainScrollHeader />
@@ -36,32 +29,31 @@ const MainScroll = () => {
             ref={setTarget}
             className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2"
           >
-            {data?.pages.map((pg: any) => (
-              <motion.div
-                className="lg:flex mb-5 h-56"
-                key={pg.id}
-                initial={{ y: 10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -10, opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                layoutId={pg.id.toString()}
-                onClick={() => setSelectedId(pg.id.toString())}
-              >
-                <img
-                  className="object-cover w-full h-56 rounded-lg lg:w-64"
-                  src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                ></img>
-                <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
-                  <div className="text-xl font-semibold text-gray-800 hover:underline">
-                    {pg.title}
+            {data?.pages[0].content &&
+              data.pages[0].content.map((pg: IPost) => (
+                <motion.div
+                  className="lg:flex mb-5 h-56"
+                  key={pg.id}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -10, opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  layoutId={pg.id?.toString()}
+                  onClick={() => setSelectedId(pg.id?.toString())}
+                >
+                  <img
+                    className="object-cover w-full h-56 rounded-lg lg:w-64"
+                    src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+                  ></img>
+                  <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
+                    <div className="text-xl font-semibold text-gray-800 hover:underline">
+                      {pg.title}
+                    </div>
+                    <p className="line-clamp-4">{pg.content}</p>
+                    <span className="text-sm text-gray-500">BY_{pg.owner}</span>
                   </div>
-                  <p className="line-clamp-4">{pg.content}</p>
-                  <span className="text-sm text-gray-500">
-                    BY_{pg.memberName}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
           </div>
         </AnimatePresence>
         <AnimatePresence>

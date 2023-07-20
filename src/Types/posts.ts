@@ -1,14 +1,14 @@
 export interface IPost {
   content: string;
   id: number;
-  memberName: string;
-  //postCreatedAt: Date;
-  postUpdatedAt: Date;
+  owner: string;
   post_like: number;
   repo: string;
   title: string;
-  pageNumber: number;
-  pageSize: number;
+  nowPage: number;
+  totalPage: number;
+  create_time: Date;
+  update_time: Date;
 }
 
 export interface IMember {}
