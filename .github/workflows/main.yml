@@ -36,6 +36,8 @@ jobs:
       - name: appspec.yml
         run: mv ./appspec.yml ./build
       
+      - name: Include Scripts
+        run: mv ./deploy.sh ./build
       
      # AWS 인증 (IAM 사용자 Access Key, Secret Key 활용) 
       - name: Configure AWS credentials
