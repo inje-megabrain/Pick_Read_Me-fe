@@ -1,11 +1,11 @@
-# echo "> [$(date +%y-%m-%d/%H:%M)] Deploy React" >> /home/ubuntu/front/deloy.log
+echo "> [$(date +%y-%m-%d/%H:%M)] Deploy React" >> /home/ubuntu/front/deploy.sh
 
-# pm2 kill
-# pm2 serve /home/front/build 3000 --spa --name front
-REPOSITORY=/home/ubuntu/front
+pm2 kill
+pm2 serve /home/ubuntu/front/build 3000 --spa --name front
+# REPOSITORY=/home/ubuntu/front
 
-cd $REPOSITORY 
+# cd $REPOSITORY 
 
-sudo yarn install 
+# sudo yarn install 
 
-sudo npx pm2 reload all
+# sudo npx pm2 reload all
