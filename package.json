@@ -2,7 +2,7 @@
   "name": "PickreadMe",
   "version": "1.0.0",
   "main": "./index.js",
-  "homepage": "https://pickreadme.site",
+  "homepage": "http://pickreadme.site",
   "license": "MIT",
   "proxy": "http://52.78.80.150:9000",
   "dependencies": {
