@@ -50,7 +50,7 @@ export const useFetchReadme = (name: string, enabled: boolean) => {
 };
 
 export const useFetchMyPost = () => {
-  return useQuery<IPost[]>(['myPost'], () => fetchMyPost(), {
+  return useQuery(['myPost'], () => fetchMyPost(), {
     onSuccess: () => {
       console.log('useFetchMyPost 성공');
     },
