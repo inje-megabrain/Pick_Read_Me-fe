@@ -11,13 +11,10 @@ const MyPage = () => {
   return (
     <>
       <Header />
-      <div className="flex mx-auto my-0 w-9/12">
-        <div className="w-60">
-          <div className="flex justify-start w-60 h-screen mt-44">
-            <SideNav />
-          </div>
+      <div className="flex flex-row">
+        <div className="flex mx-auto my-0 justify-start w-60 h-screen mt-44 ml-[100px]">
+          <SideNav />
         </div>
-
         <div className="flex justify-center w-full">
           <Outlet />
         </div>

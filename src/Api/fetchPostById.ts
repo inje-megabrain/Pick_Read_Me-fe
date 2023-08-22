@@ -1,11 +1,11 @@
-import { getCookie } from './Cookies';
 import client from './client';
+import { getCookie } from './Cookies';
 import { IPost } from '../Types/posts';
 
-const fetchMyPost = () => {
+const fetchPostById = (id: number) => {
   return new Promise((resolve) => {
     client
-      .get(`api/get/searchMyPosts`, {
+      .get(`api/get/detail/post?post_id=${id}`, {
         headers: {
           accessToken: localStorage.getItem('accessToken'),
           refreshToken: getCookie('refreshToken'),
@@ -16,9 +16,9 @@ const fetchMyPost = () => {
         console.log(v.data);
       })
       .catch((err) => {
-        console.log('fetchMyPost 에러 ' + err);
+        console.log('fetchPostById 에러 ' + err);
       });
   });
 };
 
-export default fetchMyPost;
+export default fetchPostById;
