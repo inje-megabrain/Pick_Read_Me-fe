@@ -7,6 +7,7 @@ import { useIntersectionObserver } from '../Hooks/useIntersectionObserver';
 import { useInfinite } from '../Query/post';
 import { useEffect, useState } from 'react';
 import fetchPostById from '../Api/fetchPostById';
+import PostDetailModal from '../Components/Modals/PostDetailModal';
 
 const MainScroll = () => {
   const [selectedId, setSelectedId] = useRecoilState(postAtom);
@@ -15,11 +16,16 @@ const MainScroll = () => {
   // if (isLoading) return <h3> 로딩중</h3>;
   // if (isError) return <h3>잘못된 데이터</h3>;
   const [postDetails, setPostDetails] = useState<IPost>();
+  const [showModal, setShowModal] = useState(false);
 
   const { setTarget } = useIntersectionObserver({
     hasNextPage,
     fetchNextPage,
   });
+
+  const handleModal = () => {
+    setShowModal(!showModal);
+  };
 
   useEffect(() => {
     async function getModalPost() {
@@ -55,7 +61,10 @@ const MainScroll = () => {
                   exit={{ y: -10, opacity: 0 }}
                   transition={{ duration: 0.4 }}
                   layoutId={item.id?.toString()}
-                  onClick={() => setSelectedId(item.id)}
+                  onClick={() => {
+                    setSelectedId(item.id);
+                    handleModal();
+                  }}
                 >
                   <img
                     className="object-cover w-full h-56 rounded-lg lg:w-64"
@@ -76,28 +85,30 @@ const MainScroll = () => {
           })}
         </div>
       </AnimatePresence>
-      {selectedId && (
-        <AnimatePresence>
-          <div className="w-full h-full">
-            <motion.div
-              layoutId={selectedId.toString()}
-              className="w-4/5 h-4/5 bg-sky-100 z-20 absolute flex top-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <motion.h5>?{postDetails?.owner}</motion.h5>
-              <motion.h2>{}</motion.h2>
-              <motion.button
-                onClick={() => setSelectedId(null)}
-                className="flex justify-end w-full"
-              >
-                X
-              </motion.button>
-            </motion.div>
-          </div>
-        </AnimatePresence>
-      )}
+      {
+        selectedId && showModal && postDetails && (
+          <PostDetailModal
+            showModal={handleModal}
+            visible={showModal}
+            title={postDetails?.title}
+            content={postDetails?.content}
+            owner={postDetails.owner}
+            repo={postDetails.repo}
+          />
+        )
+        // <div className="w-full h-full">
+        //   <div className="w-4/5 h-4/5 bg-sky-100 z-20 absolute flex top-20">
+        //     <h5>?{postDetails?.owner}</h5>
+        //     <h2>{}</h2>
+        //     <button
+        //       onClick={() => setSelectedId(null)}
+        //       className="flex justify-end w-full"
+        //     >
+        //       X
+        //     </button>
+        //   </div>
+        // </div>
+      }
     </>
   );
 };
