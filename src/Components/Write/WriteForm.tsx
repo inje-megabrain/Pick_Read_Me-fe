@@ -29,6 +29,7 @@ const WriteForm = () => {
       title: title,
       file: readme,
     }).then(() => {
+      //console.log('전송 성공');
       navigate('/');
     });
   };

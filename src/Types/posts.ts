@@ -7,6 +7,7 @@ export interface IPost {
   repo: string;
   title: string;
   update_time: Date;
+  svgUrl?: string;
 }
 
 export interface PageInfo {
