@@ -7,6 +7,7 @@ import { useIntersectionObserver } from '../Hooks/useIntersectionObserver';
 import { useInfinite } from '../Query/post';
 import { useEffect, useState } from 'react';
 import fetchPostById from '../Api/fetchPostById';
+import { VscHeartFilled, VscHeart } from 'react-icons/vsc';
 import PostDetailModal from '../Components/Modals/PostDetailModal';
 
 const MainScroll = () => {
@@ -48,7 +49,7 @@ const MainScroll = () => {
       <MainScrollHeader />
 
       <AnimatePresence>
-        <div className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 mt-4 md:mt-4 md:grid-cols-2 cursor-pointer">
           {data?.pages.map((page: PageInfo) => {
             return page.content.map((item: IPost) => {
               return (
@@ -73,8 +74,11 @@ const MainScroll = () => {
                     //src="https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
                   ></img>
                   <div className="flex flex-col justify-between py-6 lg:mx-6 w-80">
-                    <div className="text-xl font-semibold text-gray-800 hover:underline">
-                      {item.title}
+                    <div className="flex flex-row justify-between text-xl font-semibold text-gray-800 hover:underline">
+                      <div>{item.title}</div>
+                      <div className="flex flex-row text-sm items-center gap-1">
+                        {item.post_like} <VscHeartFilled color="violet" />
+                      </div>
                     </div>
                     <p className="line-clamp-4">{item.content}</p>
                     <span className="text-sm text-gray-500">
@@ -90,11 +94,13 @@ const MainScroll = () => {
       {
         selectedId && showModal && postDetails && (
           <PostDetailModal
+            id={postDetails.id}
             showModal={handleModal}
             title={postDetails.title}
             content={postDetails.content}
             owner={postDetails.owner}
             repo={postDetails.repo}
+            post_like={postDetails.post_like}
           />
         )
         // <div className="w-full h-full">

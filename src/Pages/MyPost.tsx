@@ -35,6 +35,7 @@ const MyPost = () => {
                   repo={item.repo}
                   owner={item.owner}
                   content={item.content}
+                  post_like={item.post_like}
                 ></MyPostBox>
               </>
             );

@@ -11,6 +11,7 @@ export interface MyPostBoxProps {
   owner: string;
   content: string;
   repo: string;
+  post_like: number;
   //handleModal: () => void;
 }
 
@@ -47,11 +48,13 @@ const MyPostBox = (props: MyPostBoxProps) => {
       </div>
       {showModal && (
         <PostDetailModal
+          id={props.id}
           showModal={handleModal}
           owner={props.owner}
           title={props.title}
           content={props.content}
           repo={props.repo}
+          post_like={props.post_like}
         />
       )}
     </>

@@ -10,6 +10,7 @@ import fetchPost from '../Api/fetchPost';
 import { IPost } from '../Types/posts';
 import { useSetRecoilState } from 'recoil';
 import fetchMyPost from '../Api/fetchMyPost';
+import fetchPostRank from '../Api/fetchPostByRank';
 
 // export const useFetchPost = (page: number) => {
 //   return useQuery<IPost[], unknown>(['posts'], () => fetchPost(page), {
@@ -64,6 +65,24 @@ export const useInfinite = () => {
   return useInfiniteQuery<IPost[] | any>(
     ['posts'],
     ({ pageParam = -1 }) => fetchPost({ page: pageParam }),
+    {
+      select: (data) => ({
+        pages: data?.pages.flatMap((page) => page),
+        pageParams: data.pageParams,
+      }),
+      getNextPageParam: (lastPage, pages) => {
+        return lastPage.nowPage !== pages[0].totalPage
+          ? lastPage.nowPage + 1
+          : undefined;
+      },
+    }
+  );
+};
+
+export const useInfiniteRank = () => {
+  return useInfiniteQuery<IPost[] | any>(
+    ['postsRank'],
+    ({ pageParam = -1 }) => fetchPostRank({ page: pageParam }),
     {
       select: (data) => ({
         pages: data?.pages.flatMap((page) => page),
