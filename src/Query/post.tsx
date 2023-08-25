@@ -63,7 +63,7 @@ export const useFetchMyPost = () => {
 export const useInfinite = () => {
   return useInfiniteQuery<IPost[] | any>(
     ['posts'],
-    ({ pageParam = 0 }) => fetchPost({ page: pageParam }),
+    ({ pageParam = -1 }) => fetchPost({ page: pageParam }),
     {
       select: (data) => ({
         pages: data?.pages.flatMap((page) => page),

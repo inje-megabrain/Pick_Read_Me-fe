@@ -91,9 +91,8 @@ const MainScroll = () => {
         selectedId && showModal && postDetails && (
           <PostDetailModal
             showModal={handleModal}
-            visible={showModal}
-            title={postDetails?.title}
-            content={postDetails?.content}
+            title={postDetails.title}
+            content={postDetails.content}
             owner={postDetails.owner}
             repo={postDetails.repo}
           />
