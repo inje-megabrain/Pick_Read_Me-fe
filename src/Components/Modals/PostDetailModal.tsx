@@ -7,7 +7,6 @@ import fetchReadme from '../../Api/fetchReadme';
 
 interface PostModalProps {
   showModal: () => void;
-  visible: boolean;
   owner: string;
   title: string;
   content: string;
@@ -16,7 +15,6 @@ interface PostModalProps {
 
 const PostDetailModal = ({
   showModal,
-  visible,
   owner,
   title,
   content,
@@ -40,18 +38,23 @@ const PostDetailModal = ({
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className="flex flex-col justify-center items-center h-4/5 w-4/5 bg-white rounded-[20px]"
+            className="flex flex-col  items-center h-4/5 w-4/5 bg-white rounded-[20px] p-[30px]"
             layoutId={selectedId?.toString()}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <motion.button onClick={showModal}>X</motion.button>
-            <p>글쓴이 : {owner}</p>
-            {/* <p>작성 날짜: {create_time.toString()}</p> */}
-            <p>제목 : {title}</p>
-            <p>내용 : {content}</p>
-            <p>깃허브 : {repo}</p>
+            <button className="flex justify-end w-full" onClick={showModal}>
+              X
+            </button>
+            <div>
+              <p>글쓴이 : {owner}</p>
+              {/* <p>작성 날짜: {create_time.toString()}</p> */}
+              <p>제목 : {title}</p>
+              <p>내용 : {content}</p>
+              <p>깃허브 : {repo}</p>
+            </div>
+
             <MDEditor.Markdown
               source={readme}
               className="w-4/5 h-3/5 overflow-y-scroll"

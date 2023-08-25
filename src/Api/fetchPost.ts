@@ -12,7 +12,7 @@ const fetchPost = ({ page }: Props) => {
       .get(`api/get/infinity/posts?page_number=${page}`)
       .then((v) => {
         resolve(v.data);
-        //console.log(v.data);
+        console.log('현재 페이지 : ', page);
       })
       .catch((err) => {
         console.log('fetchPost 에러 ' + err);
