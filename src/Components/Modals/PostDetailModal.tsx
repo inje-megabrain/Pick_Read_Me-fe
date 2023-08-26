@@ -15,6 +15,7 @@ interface PostModalProps {
   content: string;
   repo: string;
   post_like: number;
+  like: boolean;
 }
 
 const PostDetailModal = ({
@@ -25,10 +26,11 @@ const PostDetailModal = ({
   content,
   repo,
   post_like,
+  like,
 }: PostModalProps) => {
   const selectedId = useRecoilValue(postAtom);
   const [readme, setReadme] = useState<string>();
-  const [heartFilled, setHeartFilled] = useState(false);
+  const [heartFilled, setHeartFilled] = useState(like);
 
   const handleHeart = () => {
     createLike(id).then(() => {

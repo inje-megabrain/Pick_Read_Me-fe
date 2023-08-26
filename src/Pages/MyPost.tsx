@@ -36,6 +36,7 @@ const MyPost = () => {
                   owner={item.owner}
                   content={item.content}
                   post_like={item.post_like}
+                  like={item.like!}
                 ></MyPostBox>
               </>
             );

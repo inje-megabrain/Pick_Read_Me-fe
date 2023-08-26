@@ -12,6 +12,7 @@ export interface MyPostBoxProps {
   content: string;
   repo: string;
   post_like: number;
+  like: boolean;
   //handleModal: () => void;
 }
 
@@ -52,6 +53,7 @@ const MyPostBox = (props: MyPostBoxProps) => {
           showModal={handleModal}
           owner={props.owner}
           title={props.title}
+          like={props.like!}
           content={props.content}
           repo={props.repo}
           post_like={props.post_like}

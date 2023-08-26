@@ -37,7 +37,7 @@ const Profile = () => {
           </div>
           <div className="stat">
             <div className="stat-title">ReadMe</div>
-            <div className="stat-value">1</div>
+            <div className="stat-value">{auth?.postSize}</div>
             <div className="stat-desc">stat-desc</div>
           </div>
         </div>
