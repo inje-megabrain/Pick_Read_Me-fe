@@ -47,18 +47,7 @@ const MyPostBox = (props: MyPostBoxProps) => {
           </button>
         </div>
       </div>
-      {showModal && (
-        <PostDetailModal
-          id={props.id}
-          showModal={handleModal}
-          owner={props.owner}
-          title={props.title}
-          like={props.like!}
-          content={props.content}
-          repo={props.repo}
-          post_like={props.post_like}
-        />
-      )}
+      {showModal && <PostDetailModal id={props.id} showModal={handleModal} />}
     </>
   );
 };

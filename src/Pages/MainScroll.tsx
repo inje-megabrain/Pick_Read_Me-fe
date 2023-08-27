@@ -1,10 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRecoilState } from 'recoil';
-import postAtom from '../Atoms/post';
 import MainScrollHeader from '../Components/Headers/MainScrollHeader';
 import { IPost, PageInfo } from 'src/Types/posts';
 import { useIntersectionObserver } from '../Hooks/useIntersectionObserver';
-import { useInfinite } from '../Query/post';
+import { useFetchPostById, useInfinite } from '../Query/post';
 import { useEffect, useState } from 'react';
 import fetchPostById from '../Api/fetchPostById';
 import { VscHeartFilled, VscHeart } from 'react-icons/vsc';
@@ -12,14 +11,10 @@ import PostDetailModal from '../Components/Modals/PostDetailModal';
 // import {} from '../assets/image/narinn.png';
 
 const MainScroll = () => {
-  const [selectedId, setSelectedId] = useRecoilState(postAtom);
   const { data, fetchNextPage, hasNextPage, isLoading, isError } =
     useInfinite();
-  // if (isLoading) return <h3> 로딩중</h3>;
-  // if (isError) return <h3>잘못된 데이터</h3>;
-  const [postDetails, setPostDetails] = useState<IPost>();
   const [showModal, setShowModal] = useState(false);
-  const [like, setLike] = useState<boolean>();
+  const [postId, setPostId] = useState<number>();
 
   const { setTarget } = useIntersectionObserver({
     hasNextPage,
@@ -30,22 +25,15 @@ const MainScroll = () => {
     setShowModal(!showModal);
   };
 
-  useEffect(() => {
-    async function getModalPost() {
-      if (selectedId) {
-        fetchPostById(selectedId).then((v) => {
-          if (v !== null) {
-            setPostDetails(v);
-            setLike(v.like);
-            console.log('냥');
-          }
-          console.log(v);
-          console.log(selectedId);
-        });
-      }
+  const handleModalPost = (id: number) => {
+    if (id) {
+      fetchPostById(id).then((v) => {
+        setPostId(id);
+        handleModal();
+        console.log(id);
+      });
     }
-    getModalPost();
-  }, [selectedId]);
+  };
 
   return (
     <>
@@ -66,8 +54,7 @@ const MainScroll = () => {
                   transition={{ duration: 0.4 }}
                   layoutId={item.id?.toString()}
                   onClick={() => {
-                    setSelectedId(item.id);
-                    handleModal();
+                    handleModalPost(item.id);
                   }}
                 >
                   <img
@@ -94,18 +81,7 @@ const MainScroll = () => {
           })}
         </div>
       </AnimatePresence>
-      {selectedId && showModal && postDetails && (
-        <PostDetailModal
-          id={postDetails.id}
-          showModal={handleModal}
-          title={postDetails.title}
-          content={postDetails.content}
-          like={postDetails.like!}
-          owner={postDetails.owner}
-          repo={postDetails.repo}
-          post_like={postDetails.post_like}
-        />
-      )}
+      {showModal && <PostDetailModal id={postId!} showModal={handleModal} />}
     </>
   );
 };

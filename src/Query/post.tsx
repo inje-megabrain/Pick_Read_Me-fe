@@ -8,20 +8,10 @@ import issuePost from '../Api/issuePost';
 import fetchReadme from '../Api/fetchReadme';
 import fetchPost from '../Api/fetchPost';
 import { IPost } from '../Types/posts';
-import { useSetRecoilState } from 'recoil';
 import fetchMyPost from '../Api/fetchMyPost';
 import fetchPostRank from '../Api/fetchPostByRank';
-
-// export const useFetchPost = (page: number) => {
-//   return useQuery<IPost[], unknown>(['posts'], () => fetchPost(page), {
-//     onSuccess: () => {
-//       console.log('useFetchPost 성공');
-//     },
-//     onError: () => {
-//       console.log('useFetchPost 실패');
-//     },
-//   });
-// };
+import createLike from '../Api/createLike';
+import fetchPostById from '../Api/fetchPostById';
 
 export const useIssuePost = () => {
   const queryClient = useQueryClient();
@@ -33,6 +23,21 @@ export const useIssuePost = () => {
     },
     onError: () => {
       console.log('useIssuePost 실패');
+    },
+  });
+  return mutation;
+};
+
+export const useLikePost = () => {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(createLike, {
+    onSuccess: () => {
+      console.log('useCreateLike 성공');
+      queryClient.invalidateQueries('post');
+    },
+    onError: () => {
+      console.log('useCreateLike 실패');
     },
   });
   return mutation;
@@ -57,6 +62,17 @@ export const useFetchMyPost = () => {
     },
     onError: () => {
       console.log('useFetchMyPost 실패');
+    },
+  });
+};
+
+export const useFetchPostById = (id: number) => {
+  return useQuery(['post'], () => fetchPostById(id), {
+    onSuccess: () => {
+      console.log('useFetchPostById 성공');
+    },
+    onError: () => {
+      console.log('useFetchPostById 실패');
     },
   });
 };
