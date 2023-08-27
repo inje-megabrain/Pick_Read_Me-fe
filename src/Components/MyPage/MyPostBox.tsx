@@ -3,6 +3,7 @@ import PostDetailModal from '../Modals/PostDetailModal';
 import deletePost from '../../Api/deletePost';
 import { MdOutlineModeEditOutline } from 'react-icons/md';
 import { VscTrash } from 'react-icons/vsc';
+import { Link } from 'react-router-dom';
 
 export interface MyPostBoxProps {
   id: number;
@@ -21,9 +22,7 @@ const MyPostBox = (props: MyPostBoxProps) => {
   const handleModal = () => {
     setShowModal(!showModal);
   };
-  const handleEdit = () => {
-    //editPost(props.id)
-  };
+
   const handleDelete = () => {
     deletePost(props.id);
   };
@@ -39,8 +38,10 @@ const MyPostBox = (props: MyPostBoxProps) => {
           <p className="w-1/4">{props.create_time.toString().slice(0, 10)}</p>
         </div>
         <div className="flex flex-row gap-[15px] justify-center items-center w-1/4">
-          <button onClick={handleEdit}>
-            <MdOutlineModeEditOutline size={25} />
+          <button>
+            <Link to={`/write?postId=${props.id}`}>
+              <MdOutlineModeEditOutline size={25} />
+            </Link>
           </button>
           <button onClick={handleDelete}>
             <VscTrash size={25} />

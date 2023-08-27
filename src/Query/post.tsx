@@ -80,7 +80,7 @@ export const useFetchPostById = (id: number) => {
 export const useInfinite = () => {
   return useInfiniteQuery<IPost[] | any>(
     ['posts'],
-    ({ pageParam = -1 }) => fetchPost({ page: pageParam }),
+    ({ pageParam = 0 }) => fetchPost({ page: pageParam }),
     {
       select: (data) => ({
         pages: data?.pages.flatMap((page) => page),
@@ -98,7 +98,7 @@ export const useInfinite = () => {
 export const useInfiniteRank = () => {
   return useInfiniteQuery<IPost[] | any>(
     ['postsRank'],
-    ({ pageParam = -1 }) => fetchPostRank({ page: pageParam }),
+    ({ pageParam = 0 }) => fetchPostRank({ page: pageParam }),
     {
       select: (data) => ({
         pages: data?.pages.flatMap((page) => page),

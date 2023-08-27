@@ -15,17 +15,16 @@ export default function updatePostById({
 }: UpdatePostParam) {
   return new Promise((resolve) => {
     client
-      .put(`/api/put/posts?post_id=${postId}`, {
-        params: {
-          title: title,
-          content: content,
-          repo: repo,
-        },
-        headers: {
-          accessToken: localStorage.getItem('accessToken'),
-          refreshToken: getCookie('refreshToken'),
-        },
-      })
+      .put(
+        `/api/put/posts?post_id=${postId}`,
+        { title, content, repo },
+        {
+          headers: {
+            accessToken: localStorage.getItem('accessToken'),
+            refreshToken: getCookie('refreshToken'),
+          },
+        }
+      )
       .then((v) => {
         resolve(v);
       })
