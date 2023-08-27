@@ -1,37 +1,65 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useIssuePost } from '../../Query/post';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ReadMe from './ReadMe';
 import { useRecoilValue } from 'recoil';
 import readmeAtom from '../../Atoms/readme';
+import fetchPostById from '../../Api/fetchPostById';
+import updatePostById from '../../Api/updatePostById';
 
 const WriteForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [contentsCount, setContentsCount] = useState(0);
   const [repo, setRepo] = useState('');
+  const [postId, setPostId] = useState<number>();
   const readme = useRecoilValue<Blob>(readmeAtom);
 
   const navigate = useNavigate();
-  const { mutateAsync: create } = useIssuePost();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const { mutateAsync: createPost } = useIssuePost();
 
   const [clicked, setClicked] = useState(false);
 
+  useEffect(() => {
+    const postId = queryParams.get('postId');
+    if (postId) {
+      fetchPostById(parseInt(postId)).then((res) => {
+        setPostId(parseInt(postId));
+        setTitle(res.title);
+        setContent(res.content);
+        setRepo(res.repo);
+      });
+    }
+  }, []);
+
   const handleReadme = () => {
     setClicked(true);
-
     console.log('리드미 가져옴니당');
   };
   const handlePost = () => {
-    create({
-      content: content,
-      repo: repo,
-      title: title,
-      file: readme,
-    }).then(() => {
-      //console.log('전송 성공');
-      navigate('/');
-    });
+    if (postId) {
+      updatePostById({
+        postId: postId,
+        title: title,
+        content: content,
+        repo: repo,
+      }).then(() => {
+        navigate('/');
+      });
+    } else {
+      createPost({
+        content: content,
+        repo: repo,
+        title: title,
+        file: readme,
+      }).then(() => {
+        //console.log('전송 성공');
+        navigate('/');
+      });
+    }
   };
   const handleCancel = () => {
     navigate('/');
@@ -98,6 +126,7 @@ const WriteForm = () => {
           </button>
           <button
             className="btn btn-outline btn-secondary p-1 px-4 font-semibold cursor-pointer ml-2"
+            disabled={clicked ? false : true}
             onClick={handlePost}
           >
             Post
