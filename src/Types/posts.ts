@@ -8,6 +8,7 @@ export interface IPost {
   title: string;
   update_time: Date;
   svgUrl?: string;
+  like?: boolean;
 }
 
 export interface PageInfo {

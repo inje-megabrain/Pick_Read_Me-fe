@@ -4,6 +4,7 @@ import client from './client';
 export type IUser = {
   email: string;
   name: string;
+  postSize: number;
   profile: string;
   repo: string;
 };

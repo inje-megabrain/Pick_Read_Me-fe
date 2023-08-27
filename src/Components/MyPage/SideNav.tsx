@@ -44,11 +44,11 @@ const SideNav = () => {
               My Post
             </NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink className="inline-block w-full" to={'like'}>
               Like
             </NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <a className="inline-block w-full" onClick={handleLogout}>
               로그아웃
